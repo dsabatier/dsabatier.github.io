@@ -8,4 +8,4 @@ Hello! I am a game developer based in [Edmonton, Alberta](https://www.google.com
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[dsabatier@gmail.com](mailto:dsabatier@gmail.com)
