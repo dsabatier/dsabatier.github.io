@@ -5,38 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>Buttons</title>
 </head>
 
 <body>
     <div class="background">
         <header>
+            <h1>Buttons</h1>
             <nav>
-                <h1>Buttons</h1>
-                <ul>
-                    <li class="tiny-button tiny-1"><a href="#">Tiny 1</a></li>
-                    <li class="tiny-button tiny-2">Tiny 2</li>
-                    <li class="tiny-button tiny-3">Tiny 3</li>
-                    <li class="tiny-button tiny-4">Tiny 4</li>
-                </ul>
+
             </nav>
         </header>
         <main>
-            <h2>Basic Buttons</h2>
-            <div class="button-row dark-background">
-                <button>Basic 1</button>
-                <button>Basic 2</button>
-                <button>Basic 3</button>
-                <button>Basic 4</button>
-            </div>
-            <h2>Glowy Buttons</h2>
-            <div class="button-row dark-background">
-                <button class="glowy-button" id="glowy-1">Glowy 1</button>
-                <button class="glowy-button" id="glowy-2">Basic 2</button>
-                <button class="glowy-button" id="glowy-3">Basic 3</button>
-                <button class="glowy-button" id="glowy-4">Basic 4</button>
-                <button class="glowy-button" disabled>Disabled</button>
-            </div>
+            <section class="button-row dark-background">
+                <h2>Basic Buttons</h2>
+                <button aria-label="Basic Button">Basic 1</button>
+                <button aria-label="Basic Button">Basic 2</button>
+                <button aria-label="Basic Button">Basic 3</button>
+                <button aria-label="Basic Button">Basic 4</button>
+            </section>
+
+            <section class="button-row dark-background">
+                <h2>Glowy Buttons</h2>
+                <button aria-label="Glowy Button" class="glowy-button" id="glowy-1">Glowy 1</button>
+                <button aria-label="Glowy Button" class="glowy-button" id="glowy-2">Glowy 2</button>
+                <button aria-label="Glowy Button" class="glowy-button" id="glowy-3">Glowy 3</button>
+                <button aria-label="Glowy Button" class="glowy-button" id="glowy-4">Glowy 4</button>
+                <button aria-label="Glowy Button" class="glowy-button" disabled>Disabled</button>
+            </section>
+
+            <section class="button-row dark-background">
+                <h2>Icon Buttons</h2>
+                <button aria-label="Icon Button">
+                    <span class="material-icons">
+                        favorite
+                    </span>
+                </button>
+                <button aria-label="Icon Button">
+                    <span class="material-icons">
+                        chevron_left
+                    </span>
+                </button>
+                <button aria-label="Icon Button">
+                    <span class="material-icons">
+                        chevron_right
+                    </span>
+                </button>
+                <button aria-label="Icon Button">
+                    <span class="material-icons">
+                        more_vert
+                    </span>
+                </button>
+            </section>
+            <section class="button-row dark-background">\
+                <h2>List Buttons</h2>
+                <ul>
+                    <li><a href="#" class="tiny-button tiny-1">Tiny 1</a></li>
+                    <li><a href="#" class="tiny-button tiny-2">Tiny 2</a></li>
+                    <li><a href="#" class="tiny-button tiny-3">Tiny 3</a></li>
+                    <li><a href="#" class="tiny-button tiny-4">Tiny 4</a></li>
+                </ul>
+            </section>
         </main>
         <footer></footer>
     </div>

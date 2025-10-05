@@ -8,16 +8,29 @@
 }
 
 body {
-    min-height: 100vh;
-    background: linear-gradient(to bottom right, #F0F8FF, #FFF0E6);
     padding: 2rem;
-    font-family: sans-serif;
-    overflow: hidden;
+    font-family: 'SUSE', sans-serif;
 }
 
-nav {
-    text-align: center;
-    margin-bottom: 2rem;
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #000, #333);
+    z-index: -1;
+    opacity: 0.7;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 h1 {
@@ -25,46 +38,61 @@ h1 {
     font-weight: 800;
     text-align: center;
     margin-bottom: 2.5rem;
-    color: var(--brown);
+    color: var(--white);
     letter-spacing: 0.05em;
 }
 
-.tiny-1 { 
-    background-color: var(--red); 
+section h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    margin-top: 0rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    flex-basis: 100%;
 }
 
-.tiny-2 { 
-    background-color: var(--orange); 
+ul {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.tiny-3 { 
-    background-color: var(--blue); 
+.tiny-1 {
+    background-color: var(--red);
 }
 
-.tiny-4 { 
-    background-color: var(--brown); 
+.tiny-2 {
+    background-color: var(--orange);
 }
 
-.tiny-5 { 
-    background-color: white; 
-    color: var(--brown); 
-    border: 2px solid var(--brown); 
+.tiny-3 {
+    background-color: var(--blue);
+}
+
+.tiny-4 {
+    background-color: var(--brown);
+}
+
+.tiny-5 {
+    background-color: white;
+    color: var(--brown);
+    border: 2px solid var(--brown);
 }
 
 .tiny-button {
+    border-radius: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     transition: transform 0.1s;
     color: var(--white);
     font-weight: bold;
 
-    /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
-}
-
-.tiny-button a {
-    color: var(--white);
-    font-weight: bold;
-    text-decoration: none;
+    border: none;
+    user-select: none;
 
     /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
 }
@@ -73,22 +101,24 @@ h1 {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.tiny-button:hover {
+a.tiny-button:hover {
     transform: scale(1.05) translateY(-2px);
 }
 
-.tiny-button:active {
+a.tiny-button:active {
     transform: scale(0.95) translateY(0);
-}   
-
-.tiny-button a:focus {
-    outline: 2px solid var(--blue);
-    outline-offset: 4px;
 }
 
-.tiny-button a:hover {
+a.tiny-button:focus {
+    outline: 2px solid var(--blue);
+    border-radius: 1.5rem;
+    outline-offset: 0.25rem;
+    outline-style: dashed;
+}
+
+a.tiny-button:hover {
     text-decoration: none;
-}   
+}
 
 button {
     background-color: var(--blue);
@@ -113,45 +143,16 @@ button:focus {
     outline-style: dashed;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-nav ul li {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.25rem;
-    padding: 1rem 2rem;
-    border-radius: 1.5rem;
-    border: none;
-    color: white;
-    user-select: none;
-}
-
-nav ul li a:hover {
-    transform: scale(1.05) translateY(-3px);
-    box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    
-}
-
-nav ul li a:active {
-    transform: scale(0.95) translateY(0);
-    box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
 button {
     margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 button:hover {
     transform: scale(1.05) translateY(-3px);
     box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    
+
 }
 
 button:active {
@@ -168,7 +169,7 @@ main {
 .button-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 2rem;
     width: 100%;
 }
@@ -177,28 +178,28 @@ main {
     margin: 0.5rem 0.5rem;
 }
 
-.button-row button:nth-child(1) {
+.button-row button:nth-of-type(1) {
     background-color: var(--red);
 }
 
-.button-row button:nth-child(2) {
+.button-row button:nth-of-type(2) {
     background-color: var(--orange);
 }
 
-.button-row button:nth-child(3) {
+.button-row button:nth-of-type(3) {
     background-color: var(--blue);
 }
 
-.button-row button:nth-child(4) {
+.button-row button:nth-of-type(4) {
     background-color: var(--brown);
 }
 
 .dark-background {
-    background: linear-gradient(to bottom right, var(--brown), var(--brown-50));
+    background: #333;
     padding: 1rem;
     margin: 0.5rem -2rem 2rem -1rem;
     border-radius: 0.5rem;
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--brown), 0 2px 4px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #444, 0 2px 4px 0px rgba(0, 0, 0, 0.06);
 }
 
 button.glowy-button:hover {
@@ -224,7 +225,7 @@ button.glowy-button:hover {
 
 #glowy-4 {
     box-shadow: 0 0 15px var(--brown-50);
-    text-shadow: 0 0 px rgba(255, 255, 255, 1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
 }
 
 button:disabled {
@@ -238,4 +239,40 @@ button:disabled {
 
 button.disabled:hover {
     transition: transform 0s linear;
+}
+
+.circle {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-color: #fff;
+    border-radius: 0.85rem;
+    float: left;
+    margin-right: -1rem;
+    margin-left: -1rem;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
 }
