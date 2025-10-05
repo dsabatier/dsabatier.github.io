@@ -12,6 +12,7 @@ body {
     background: linear-gradient(to bottom right, #F0F8FF, #FFF0E6);
     padding: 2rem;
     font-family: sans-serif;
+    overflow: hidden;
 }
 
 nav {
@@ -117,6 +118,10 @@ nav ul li a:active {
     box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+button {
+    margin-bottom: 2rem;
+}
+
 button:hover {
     transform: scale(1.05) translateY(-3px);
     box-shadow: 0 4px 6px 1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -134,8 +139,16 @@ main {
     align-items: flex-start;
 }
 
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
 .button-row button {
-    margin: 0 0.5rem;
+    margin: 0.5rem 0.5rem;
 }
 
 .button-row button:nth-child(1) {
@@ -156,15 +169,36 @@ main {
 
 .dark-background {
     background: linear-gradient(to bottom right, var(--brown), var(--brown-50));
-    padding: 2rem;
+    padding: 1rem;
+    margin: 0.5rem -2rem 2rem -1rem;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5), 0 2px 4px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem var(--brown), 0 2px 4px 0px rgba(0, 0, 0, 0.06);
 }
 
 button.glowy-button:hover {
-    box-shadow: 0 0 15px var(--white);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     transition: box-shadow 0.1s ease-in-out, transform 0.05s linear, text-shadow 0.1s ease-in-out;
+}
+
+#glowy-1 {
+    box-shadow: 0 0 15px var(--red);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+#glowy-2 {
+    box-shadow: 0 0 15px var(--orange);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+#glowy-3 {
+    box-shadow: 0 0 15px var(--blue);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+#glowy-4 {
+    box-shadow: 0 0 15px var(--brown-50);
+    text-shadow: 0 0 px rgba(255, 255, 255, 1);
 }
 
 button:disabled {
