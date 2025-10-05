@@ -55,6 +55,16 @@ h1 {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     transition: transform 0.1s;
+    color: var(--white);
+    font-weight: bold;
+
+    /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+}
+
+.tiny-button a {
+    color: var(--white);
+    font-weight: bold;
+    text-decoration: none;
 
     /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
 }
@@ -69,7 +79,16 @@ h1 {
 
 .tiny-button:active {
     transform: scale(0.95) translateY(0);
+}   
+
+.tiny-button a:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 4px;
 }
+
+.tiny-button a:hover {
+    text-decoration: none;
+}   
 
 button {
     background-color: var(--blue);
@@ -85,6 +104,13 @@ button {
     letter-spacing: 0.05em;
     user-select: none;
     transition: transform 0.1s ease-out;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 4px;
+    outline-style: dashed;
 }
 
 nav ul {
