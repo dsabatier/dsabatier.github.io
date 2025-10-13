@@ -1,8 +1,8 @@
-import { perlin } from './perlin.js'; // IMPORTANT: Import the perlin object
+import { perlin } from './perlin.js';
 import { audio } from './audio.js';
 import { noodlemath } from './math.js';
 
-const KEYBOARD_SPEED = 450; // Pixels per second
+const KEYBOARD_SPEED = 450;
 let moveLeft = false;
 let moveRight = false;
 
@@ -12,7 +12,7 @@ let originTime = 0;
 function initGame() {
     audio.startAudioContext();
     originTime = performance.now();
-    // --- Custom Alert/Message Box Function (Replaces alert()) ---
+
     const messageBox = document.getElementById('message-box');
     const messageContent = document.getElementById('message-content');
     const messageButton = document.getElementById('message-button');
@@ -43,6 +43,8 @@ function initGame() {
     const GROUND_LEVEL = canvas.height - 10;
     const STREAM_WIDTH = 300; // Max horizontal deviation of the spawner
 
+
+    // --- Colors ---
     const RED = '#F35F61';
     const ORANGE = '#F19741';
     const YELLOW = '#F2E641';
@@ -73,17 +75,14 @@ function initGame() {
         currentHeight: CATCHER_HEIGHT,
         tween: { isTweening: false, t: 0, start: 0, end: 1, speed: 1 },
         updatePosition: function (newX) {
-            // Ensure the catcher center is within bounds
             this.x = Math.max(
                 this.width / 2,
                 Math.min(newX, canvas.width - this.width / 2)
             );
         },
 
-        // Draw the catcher
         draw: function () {
             ctx.fillStyle = this.color;
-            // Draw centered on this.x
             ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
             ctx.strokeStyle = this.strokeStyle
             ctx.lineWidth = 3;
@@ -106,7 +105,7 @@ function initGame() {
 
         },
         flash: function () {
-            this.color = WHITE; // Yellow flash
+            this.color = WHITE;
             this.strokeStyle = WHITE;
             setTimeout(() => {
                 this.color = BLUE, 50
@@ -157,25 +156,20 @@ function initGame() {
         }
     }
 
-    // --- Falling Object Class ---
     class FallingObject {
         constructor(x) {
             this.x = x;
-            this.y = -20; // Start above the screen
+            this.y = -20;
             this.radius = 15;
-            // Add slight randomness to speed
+
             this.speed = FALL_SPEED * (0.9 + Math.random() * 0.08) + (performance.now() - originTime) / 200;
             this.color = ORANGE;
-
-            console.log((performance.now(-originTime) / 200));
         }
 
-        // Simple Arcade Physics: Move straight down
         update(deltaTime) {
             this.y += this.speed * deltaTime;
         }
 
-        // Draw the object (a circle)
         draw() {
             ctx.fillStyle = this.color;
             ctx.beginPath();
@@ -229,19 +223,18 @@ function initGame() {
     // --- Game Logic Functions ---
     let spawnPoint = 0;
     function spawnManager(currentTime) {
-        const levelIntensity = 1 - (Math.sin(currentTime / 10000 * 0.5) + 1) / 2; // 0 to 1 over time
+        currentTime -= originTime;
+        console.log(currentTime);
+        const levelIntensity = 1 - (Math.sin(currentTime / 10000 * 0.5) + 1) / 2;
         spawnPoint = (canvas.width * 0.5) + (perlin.get(currentTime / 1000, currentTime / 1000) * STREAM_WIDTH) + (Math.sin(currentTime / 5000) * (STREAM_WIDTH * 0.5) * (1 + levelIntensity));
 
         // Use Perlin noise on Y-axis to determine if we should spawn this frame
         const shouldSpawn = Math.abs(perlin.get(0, currentTime / 1000 * 0.5)) > 0.1;
 
         if (!shouldSpawn) return;
-        // Use sine wave to move the stream source's X position and add noise to that
-        const streamXOffset = ((canvas.width * 0.5) + Math.sin(currentTime / 10000) * STREAM_WIDTH) + perlin.get(Math.sin(currentTime / 1000 * 1.15), 0) * STREAM_WIDTH * 2;
-
 
         // Adjust spawn rate based on level intensity (more intensity = more frequent spawns)
-        const adjustedSpawnRate = SPAWN_RATE * (1 - levelIntensity * 0.7); // Up to 70% faster spawn
+        const adjustedSpawnRate = SPAWN_RATE * (1 - levelIntensity * 0.8); // Up to 70% faster spawn
 
 
         if (currentTime - lastSpawnTime > adjustedSpawnRate * 1000) {
@@ -304,7 +297,8 @@ function initGame() {
         scoreDisplay.textContent = `SCORE: ${score}`;
         livesDisplay.textContent = `LIVES: ${lives}`;
         gameActive = true;
-        lastTime = performance.now();
+        lastTime = 0;
+        lastSpawnTime = 0;
         Background.init();
         originTime = performance.now();
         requestAnimationFrame(gameLoop);
