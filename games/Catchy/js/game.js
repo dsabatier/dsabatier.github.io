@@ -1,13 +1,17 @@
-// game.js
 import { perlin } from './perlin.js'; // IMPORTANT: Import the perlin object
+import { audio } from './audio.js';
+import { noodlemath } from './math.js';
 
-// --- New Keyboard State and Configuration ---
-const KEYBOARD_SPEED = 450; // Pixels per second for keyboard movement
+const KEYBOARD_SPEED = 450; // Pixels per second
 let moveLeft = false;
 let moveRight = false;
-// -------------------------------------------
+
+let lastTime = 0;
+let originTime = 0;
 
 function initGame() {
+    audio.startAudioContext();
+    originTime = performance.now();
     // --- Custom Alert/Message Box Function (Replaces alert()) ---
     const messageBox = document.getElementById('message-box');
     const messageContent = document.getElementById('message-content');
@@ -24,6 +28,8 @@ function initGame() {
 
     // --- Game Setup ---
     const canvas = document.getElementById('gameCanvas');
+    canvas.width = 800;
+    canvas.height = 600;
     const ctx = canvas.getContext('2d');
     const scoreDisplay = document.getElementById('score-display');
     const livesDisplay = document.getElementById('lives-display');
@@ -31,15 +37,25 @@ function initGame() {
     // --- Configuration ---
     const CATCHER_HEIGHT = 20;
     const CATCHER_WIDTH = 100;
-    const CATCHER_Y = canvas.height - 40; // Fixed position near the bottom
-    const FALL_SPEED = 200; // units per second
-    const SPAWN_RATE = 0.08; // Spawn a new object every 80 milliseconds
+    const CATCHER_Y = canvas.height - 140; // Fixed position near the bottom
+    const FALL_SPEED = 100; // units per second
+    const SPAWN_RATE = 0.35; // Spawn a new object every 80 milliseconds
     const GROUND_LEVEL = canvas.height - 10;
     const STREAM_WIDTH = 300; // Max horizontal deviation of the spawner
-    const NOISE_FREQUENCY = 0.0005; // Controls how fast the Perlin noise changes over time
+
+    const RED = '#F35F61';
+    const ORANGE = '#F19741';
+    const YELLOW = '#F2E641';
+    const GREEN = '#41F28D';
+    const BLUE = '#00AAF3';
+    const BROWN = '#554242';
+    const BROWN_50 = '#816565';
+    const WHITE = '#FFFFFF';
+    const BLACK_R = '#160a0aff';
+    const BLACK_B = '#0c0a16ff';
 
     let score = 0;
-    let lives = 3;
+    let lives = 100;
     let lastSpawnTime = performance.now();
     let gameActive = true;
     let fallingObjects = [];
@@ -51,9 +67,11 @@ function initGame() {
         y: CATCHER_Y,
         width: CATCHER_WIDTH,
         height: CATCHER_HEIGHT,
-        color: '#10b981', // Emerald-500
-
-        // Renamed from update to updatePosition. Takes the desired new X coordinate.
+        color: BLUE,
+        strokeStyle: WHITE,
+        currentWidth: CATCHER_WIDTH,
+        currentHeight: CATCHER_HEIGHT,
+        tween: { isTweening: false, t: 0, start: 0, end: 1, speed: 1 },
         updatePosition: function (newX) {
             // Ensure the catcher center is within bounds
             this.x = Math.max(
@@ -67,11 +85,77 @@ function initGame() {
             ctx.fillStyle = this.color;
             // Draw centered on this.x
             ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-            ctx.strokeStyle = '#f8fafc';
+            ctx.strokeStyle = this.strokeStyle
             ctx.lineWidth = 3;
             ctx.strokeRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+
+            if (this.tween.isTweening) {
+                this.tween.t += 0.1 * this.tween.speed;
+                if (this.tween.t >= 1) {
+                    this.tween.speed = 1;
+                    this.tween.t = 1;
+                    this.isTweening = false;
+                    this.tween.end = CATCHER_WIDTH;
+                }
+
+                this.width = noodlemath.lerp(this.tween.start, this.tween.end, this.tween.t);
+            }
+            else {
+                this.width = CATCHER_WIDTH;
+            }
+
+        },
+        flash: function () {
+            this.color = WHITE; // Yellow flash
+            this.strokeStyle = WHITE;
+            setTimeout(() => {
+                this.color = BLUE, 50
+                this.strokeStyle = WHITE;
+            }, 100);
+
+            this.tween.start = CATCHER_WIDTH;
+            this.tween.end = CATCHER_WIDTH * 1.25;
+            this.tween.speed = 3;
+            this.tween.t = 0;
+            this.tween.isTweening = true;
         }
     };
+
+    const Background = {
+        starCount: 20,
+        stars: [],
+        color: BLUE + '11',
+        init: function () {
+            for (let i = 0; i < this.starCount; i++) {
+                this.stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: 10 + Math.random() * 150,
+                    speed: 20 + Math.random() * 40
+                });
+            }
+        },
+        update: function (deltaTime) {
+            this.stars.forEach(star => {
+                star.y += star.speed * deltaTime;
+                if (star.y > canvas.height) {
+                    star.y = 0 - star.radius * 2;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+        },
+        draw: function () {
+            ctx.fillStyle = BLACK_B;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = this.color;
+            this.stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+    }
 
     // --- Falling Object Class ---
     class FallingObject {
@@ -80,8 +164,10 @@ function initGame() {
             this.y = -20; // Start above the screen
             this.radius = 15;
             // Add slight randomness to speed
-            this.speed = FALL_SPEED * (0.9 + Math.random() * 0.2);
-            this.color = `hsl(${Math.random() * 360}, 70%, 50%)`; // Random color
+            this.speed = FALL_SPEED * (0.9 + Math.random() * 0.08) + (performance.now() - originTime) / 200;
+            this.color = ORANGE;
+
+            console.log((performance.now(-originTime) / 200));
         }
 
         // Simple Arcade Physics: Move straight down
@@ -95,8 +181,8 @@ function initGame() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             ctx.fill();
-            ctx.strokeStyle = '#f8fafc';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 4;
             ctx.stroke();
         }
     }
@@ -141,19 +227,25 @@ function initGame() {
     // -------------------------------------
 
     // --- Game Logic Functions ---
-
+    let spawnPoint = 0;
     function spawnManager(currentTime) {
+        const levelIntensity = 1 - (Math.sin(currentTime / 10000 * 0.5) + 1) / 2; // 0 to 1 over time
+        spawnPoint = (canvas.width * 0.5) + (perlin.get(currentTime / 1000, currentTime / 1000) * STREAM_WIDTH) + (Math.sin(currentTime / 5000) * (STREAM_WIDTH * 0.5) * (1 + levelIntensity));
 
         // Use Perlin noise on Y-axis to determine if we should spawn this frame
         const shouldSpawn = Math.abs(perlin.get(0, currentTime / 1000 * 0.5)) > 0.1;
 
         if (!shouldSpawn) return;
         // Use sine wave to move the stream source's X position and add noise to that
-        const streamXOffset = (Math.sin(currentTime / 10000) * STREAM_WIDTH) + perlin.get(Math.sin(currentTime / 1000 * 1.15), 0) * STREAM_WIDTH * 2;
-        const spawnX = canvas.width / 2 + streamXOffset;
+        const streamXOffset = ((canvas.width * 0.5) + Math.sin(currentTime / 10000) * STREAM_WIDTH) + perlin.get(Math.sin(currentTime / 1000 * 1.15), 0) * STREAM_WIDTH * 2;
 
-        if (currentTime - lastSpawnTime > SPAWN_RATE * 1000) {
-            const newObject = new FallingObject(spawnX);
+
+        // Adjust spawn rate based on level intensity (more intensity = more frequent spawns)
+        const adjustedSpawnRate = SPAWN_RATE * (1 - levelIntensity * 0.7); // Up to 70% faster spawn
+
+
+        if (currentTime - lastSpawnTime > adjustedSpawnRate * 1000) {
+            const newObject = new FallingObject(spawnPoint);
             fallingObjects.push(newObject);
             lastSpawnTime = currentTime;
         }
@@ -172,28 +264,29 @@ function initGame() {
 
             const collision_threshold_x = (Catcher.width / 2) + obj.radius;
             const collision_threshold_y = (Catcher.height / 2) + obj.radius;
-
             if (x_dist < collision_threshold_x && y_dist < collision_threshold_y) {
+
                 // CATCH!
+                audio.playCatchSound(lastTime);
                 score++;
                 scoreDisplay.textContent = `SCORE: ${score}`;
                 fallingObjects.splice(i, 1); // Remove object
                 // Flash effect on catcher
-                Catcher.color = '#fde047'; // Yellow flash
-                setTimeout(() => Catcher.color = '#10b981', 50);
+                Catcher.flash();
 
             }
             // --- Ground Miss Check ---
             else if (obj.y > GROUND_LEVEL) {
-                // // MISS!
-                // lives--;
-                // // livesDisplay.textContent = `LIVES: ${lives}`;
-                // fallingObjects.splice(i, 1); // Remove object
+                // MISS!
+                lives--;
+                livesDisplay.textContent = `LIVES: ${lives}`;
+                fallingObjects.splice(i, 1); // Remove object
+                audio.playMissSound(lastTime);
 
-                // if (lives <= 0) {
-                //     endGame();
-                //     break;
-                // }
+                if (lives <= 0) {
+                    endGame();
+                    break;
+                }
             }
         }
     }
@@ -201,21 +294,24 @@ function initGame() {
     function endGame() {
         gameActive = false;
         showMessage(`GAME OVER! Your final score: ${score}`, initializeGame);
+
     }
 
     function initializeGame() {
         score = 0;
-        lives = 3;
+        lives = 5;
         fallingObjects = [];
         scoreDisplay.textContent = `SCORE: ${score}`;
-        // livesDisplay.textContent = `LIVES: ${lives}`;
+        livesDisplay.textContent = `LIVES: ${lives}`;
         gameActive = true;
         lastTime = performance.now();
+        Background.init();
+        originTime = performance.now();
         requestAnimationFrame(gameLoop);
     }
 
     // --- Main Game Loop ---
-    let lastTime;
+
 
     function gameLoop(currentTime) {
         const deltaTime = (currentTime - lastTime) / 1000; // Delta time in seconds
@@ -250,24 +346,38 @@ function initGame() {
 
         spawnManager(currentTime);
 
+        Background.update(deltaTime);
         fallingObjects.forEach(obj => obj.update(deltaTime));
         checkCollisions();
 
         // 2. Drawing (Redraw everything)
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear screen
 
+        Background.draw();
         // Draw objects
         fallingObjects.forEach(obj => obj.draw());
 
         // Draw catcher last so it's on top
         Catcher.draw();
 
+        // draw spawn point for debugging
+        ctx.fillStyle = GREEN;
+        ctx.beginPath();
+        ctx.arc(spawnPoint, 15, 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = WHITE;
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // Reset per-frame flags
+        audio.playedThisFrame = false;
+
         // 3. Request next frame
         requestAnimationFrame(gameLoop);
     }
 
     // --- Start the Game ---
-    showMessage("Use your **mouse/finger** OR the **Left/Right Arrow keys (or A/D)** to move the catcher. Catch objects, avoid misses!", initializeGame);
+    showMessage("Move: <ul><li> mouse/swipe</li><li>a/d</li><li>arrow keys</li></ul>", initializeGame);
 }
 
 // Ensure the game initialization only runs after the document is ready

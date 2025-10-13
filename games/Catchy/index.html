@@ -4,25 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade Catcher</title>
+    <title>Catchy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 
-    <h1 class="text-3xl mb-4 text-sky-400">Arcade Catcher</h1>
+    <h1 class="text-3xl mb-4 text-sky-400"></h1>
 
     <div id="game-container">
         <div class="ui-panel">
             <div id="score-display">SCORE: 0</div>
-            <!-- <div id="lives-display">LIVES: 3</div> -->
+            <div id="lives-display">LIVES: 0</div>
         </div>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
     </div>
 
-    <!-- Hidden Message Box for Alerts -->
     <div id="message-box" class="message-box hidden">
         <div id="message-content" class="text-xl mb-4"></div>
         <button id="message-button">OK</button>
