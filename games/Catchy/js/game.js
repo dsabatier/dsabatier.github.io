@@ -17,6 +17,10 @@ function initGame() {
     const game = new Game();
 
     function beginGame() {
+        game.onGameOver = () => {
+            gameActive = false;
+            showMessage(`GAME OVER! Your final score: ${game.score}`, initGame);
+        };
         requestAnimationFrame(gameLoop);
     }
 

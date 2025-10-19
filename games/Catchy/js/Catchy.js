@@ -27,10 +27,11 @@ const GROUND_LEVEL = canvas.height - 10;
 
 export class Game {
     constructor() {
+        this.gameActive = true;
         this.score = 0;
         this.lives = 5;
 
-        this.paddle = new PlayerPaddle(this, canvas.width / 2, canvas.height - 140, BLUE);
+        this.paddle = new PlayerPaddle(canvas.width / 2, canvas.height - 140, BLUE);
         this.spawner = new ObjectSpawner(this, canvas.width / 2, 20);
         this.fallingObjects = [];
         this.particleObjects = [];
@@ -44,6 +45,7 @@ export class Game {
 
         this._updateScore();
 
+        this.onGameOver = () => { };
     }
 
     _updateScore() {
@@ -80,7 +82,7 @@ export class Game {
     }
 
     endGame() {
-
+        this.onGameOver();
     }
 
     spawnParticle(x, y, color) {
@@ -107,17 +109,28 @@ export class Game {
                     audio.playHurtSound(this.currentTime);
                     this.cameraShaker.begin(0.2);
                     this.paddle.flash(RED);
+
+                    this.lives--;
+                    this._updateScore();
+                    if (this.lives <= 0) {
+                        this.endGame();
+                        break;
+                    }
                 }
                 else if (obj.color == YELLOW) {
                     audio.playCoinSound(this.currentTime);
                     this.score++;
+
+                    if (this.score % 10 == 0) {
+                        this.lives++;
+                    }
                     this._updateScore();
 
                     this.paddle.flash(YELLOW);
                 }
                 else {
                     audio.playCatchSound(this.currentTime);
-                    this.score++;
+                    this.lives++;
                     this._updateScore();
 
                     // Flash effect on catcher
@@ -131,12 +144,11 @@ export class Game {
 
             }
             else if (obj.y > GROUND_LEVEL) {
-                // MISS!
-                if (obj.color == RED) {
-                    this.lives--;
-                    this._updateScore();
-                    this.cameraShaker.begin(0.2);
-                }
+                // if (obj.color == RED) {
+                //     //this.lives--;
+                //     this._updateScore();
+                //     this.cameraShaker.begin(0.2);
+                // }
 
                 const removedObjects = this.fallingObjects.splice(i, 1);
                 removedObjects.forEach(removed => {
@@ -171,6 +183,25 @@ export class FallingObject {
     }
 
     draw(ctx) {
+
+        if (this.color == RED) {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.rect(this.x, this.y, this.radius, this.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            if (this.radius < 10) {
+                ctx.lineWidth = 2;
+            }
+            else {
+
+                ctx.lineWidth = 4;
+            }
+            ctx.stroke();
+            ctx.closePath();
+            return;
+        }
+
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -184,6 +215,7 @@ export class FallingObject {
             ctx.lineWidth = 4;
         }
         ctx.stroke();
+        ctx.closePath();
     }
 }
 
@@ -270,7 +302,7 @@ export class ObjectSpawner {
                 const newObject = new FallingObject(
                     this.x,
                     10,
-                    12,
+                    16,
                     FALL_SPEED * (0.55 + Math.random() * 0.5) + this.currentTime / 200,
                     RED);
 
@@ -376,6 +408,7 @@ export class PlayerPaddle {
     }
 
     draw(ctx) {
+        console.log(`${this.x}, ${this.y}`)
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
         ctx.strokeStyle = this.strokeStyle
@@ -466,8 +499,6 @@ export class CameraShaker {
     begin(duration) {
         this.startTime = this.currentTime;
         this.duration = duration;
-
-        console.log("shake");
     }
 
     update(deltaTime) {
@@ -477,7 +508,6 @@ export class CameraShaker {
     draw(ctx) {
 
         const progress = (this.currentTime - this.startTime) / this.duration;
-        console.log(progress);
         const intensity = Math.sin(this.currentTime * 50) * 15 * progress;
 
         if (progress < 1) {
