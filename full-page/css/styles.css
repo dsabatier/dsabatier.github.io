@@ -1,0 +1,120 @@
+:root {
+    --YELLOW-PRIMARY: #FFCE54;
+    --YELLOW-SECONDARY: #F6BB42;
+    --YELLOW-ACCENT1: #FF00FF;
+    --YELLOW-ACCENT2: #32CD32;
+
+    --BLUE-PRIMARY: #5D9CEC;
+    --BLUE-SECONDARY: #4A89DC;
+    --BLUE-ACCENT1: #FF00FF;
+    --BLUE-ACCENT2: #32CD32;
+
+    --RED-PRIMARY: #ED5565;
+    --RED-SECONDARY: #DA4453;
+    --RED-ACCENT1: #FF00FF;
+    --RED-ACCENT2: #32CD32;
+
+    --PURPLE-PRIMARY: #AC92EC;
+    --PURPLE-SECONDARY: #967ADC;
+    --PURPLE-ACCENT1: #FF00FF;
+    --PURPLE-ACCENT2: #32CD32;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #333;
+}
+
+.page-list {
+    background-color: red;
+
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.page-list>article.flex {
+    padding: 2rem 2rem;
+    width: calc(100% - 4rem);
+    height: calc(100vh - 4rem);
+
+    scroll-snap-align: start;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    align-items: center
+}
+
+.page-list>article.flex.row {
+    flex-direction: row;
+}
+
+.page-list>article.flex.column {
+    flex-direction: column;
+}
+
+
+.page-list>article>section {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 60rem;
+    height: 30vh;
+
+    border-radius: 1rem;
+}
+
+.page-list>article.grid {
+    padding: 2rem 2rem;
+    width: calc(100% - 4rem);
+    height: calc(100vh - 4rem);
+
+    scroll-snap-align: start;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.page-list>article.grid section {
+    width: 25rem;
+    height: 15rem;
+}
+
+
+
+/* Rotate through colors */
+.page-list>article:nth-child(4n + 1) {
+    background-color: var(--BLUE-PRIMARY);
+}
+
+.page-list>article:nth-child(4n + 1)>section {
+    background-color: var(--BLUE-SECONDARY);
+}
+
+.page-list>article:nth-child(4n + 2) {
+    background-color: var(--RED-PRIMARY);
+}
+
+.page-list>article:nth-child(4n + 2)>section {
+    background-color: var(--RED-SECONDARY);
+}
+
+.page-list>article:nth-child(4n + 3) {
+    background-color: var(--YELLOW-PRIMARY);
+}
+
+.page-list>article:nth-child(4n + 3)>section {
+    background-color: var(--YELLOW-SECONDARY);
+}
+
+.page-list>article:nth-child(4n + 4) {
+    background-color: var(--PURPLE-PRIMARY);
+}
+
+.page-list>article:nth-child(4n + 4)>section {
+    background-color: var(--PURPLE-SECONDARY);
+}
