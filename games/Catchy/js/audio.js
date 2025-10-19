@@ -22,10 +22,36 @@ const ac = {
             envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.02 }
         });
 
+        this.hurtSynth = new Tone.PolySynth().toDestination();
+        this.hurtSynth.set({
+            oscillator: { type: "sawtooth" }, // Sawtooth provides a rich, buzzy tone
+            envelope: { attack: 0.05, decay: 0.3, sustain: 0, release: 0.05 }
+        });
+
+        this.coinSynth = new Tone.PolySynth().toDestination();
+        this.coinSynth.set({
+            oscillator: { type: "triangle" },
+            envelope: { attack: 0.005, decay: 0.15, sustain: 0, release: 0.05 }
+        });
+
         this.audioContextStarted = true;
     },
     canPlayAudio: function () {
         return this.audioContextStarted && !this.muted && !this.playedThisFrame;
+    },
+    playCoinSound: function (lastTime) {
+        if (!this.canPlayAudio()) return;
+        this.playedThisFrame = true;
+        const freq = 100 + perlin.get(Math.sin(lastTime), Math.sin(lastTime)) + Math.sin(lastTime / 100) * 50;
+
+        this.coinSynth.triggerAttackRelease("C6", "4n");
+    },
+    playHurtSound: function (lastTime) {
+        if (!this.canPlayAudio()) return;
+        this.playedThisFrame = true;
+        const freq = 100 + perlin.get(Math.sin(lastTime), Math.sin(lastTime)) + Math.sin(lastTime / 100) * 50;
+
+        this.hurtSynth.triggerAttackRelease("C2", "4n");
     },
     playCatchSound: function (lastTime) {
 
