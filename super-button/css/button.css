@@ -1,0 +1,177 @@
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 36px;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    box-shadow:
+        0 8px 0 #8b008b,
+        0 0 15px rgba(255, 0, 255, 0.6);
+
+    background: linear-gradient(90deg, #ff00ff, #8a2be2, #00ffff);
+    background-size: 300% 300%;
+
+    transition:
+        transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.2s ease-in-out,
+        background-position 0.6s ease,
+        letter-spacing 0.3s ease-in-out;
+}
+
+.cta-button:hover {
+
+    background-position: 100% 50%;
+
+    box-shadow:
+        0 8px 0 #7b007b,
+        0 0 30px 5px rgba(255, 0, 255, 1);
+
+
+    transform: scaleX(1.05) scaleY(0.95);
+
+    letter-spacing: 4.5px;
+}
+
+
+.cta-button:active {
+    transform: translateY(4px) scale(1.02);
+    box-shadow:
+        0 4px 0 #6b006b,
+        0 0 15px rgba(255, 0, 255, 0.8);
+
+    color: #fffacd;
+}
+
+
+.cta-button:focus {
+    box-shadow:
+        0 8px 0 #7b007b,
+        0 0 35px 5px rgba(0, 255, 255, 1);
+    outline: none;
+
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 60%;
+    height: 100%;
+
+
+    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.8) 50%,
+            transparent 61%),
+        linear-gradient(90deg,
+            transparent 20%,
+            rgba(255, 255, 255, 0.8) 5%,
+            transparent 100%);
+
+    transform: skewX(-45deg);
+
+    transition: left 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+
+.cta-button:hover::after {
+    left: 200%;
+    transition: left 0.8s ease-in-out;
+
+    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg,
+            transparent 19%,
+            rgba(255, 255, 255, 0.8) 20%,
+            transparent 61%);
+}
+
+
+@keyframes jiggle {
+    0% {
+        transform: translate(3px, 0px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-3px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-5px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(5px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-3px, 4px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-5px, 0px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 2px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -2px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(3px, 0px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, 2px) rotate(-1deg);
+    }
+}
+
+.cta-button.shake {
+    animation: jiggle 0.5s ease-in-out infinite;
+}
+
+@keyframes smooth-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 15px 5px rgba(255, 165, 0, 1);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7);
+    }
+}
+
+.cta-button.pulsing {
+    animation:
+        smooth-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+
+    transition: all 0.5s ease-in-out;
+}

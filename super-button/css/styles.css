@@ -1,0 +1,41 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+.inner-container {
+
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 8px);
+    background-color: #333;
+    padding: 16px;
+}
+
+.button-container {
+    max-width: 960px;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-8px);
+    border-radius: 12px;
+    border: solid 4px #CCC;
+    background-color: black;
+    padding: 40px 40px;
+    height: 250px;
+}
+
+.spacer {
+    height: 200vh;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-between
+}
