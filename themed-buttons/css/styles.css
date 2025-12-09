@@ -49,6 +49,10 @@ button {
     color: #dc3545;
 }
 
+.warning-button:focus {
+    outline: none;
+}
+
 /*  Animated '!', this could be a font-awesome icon or a spinner or something.
     :before creates a pseudo element */
 .warning-button::before {
@@ -66,7 +70,8 @@ button {
     transition: transform 0.4s ease-in-out, color 0.3s ease-in-out;
 }
 
-.warning-button:hover::before {
+.warning-button:hover::before,
+.warning-button:focus::before {
     position: absolute;
     display: inline-block;
     content: '!';
@@ -77,13 +82,15 @@ button {
 
 }
 
-.warning-button:hover::before:hover {
+.warning-button:hover::before:hover,
+.warning-button:focus::before:focus {
     position: absolute;
     display: inline-block;
     content: '!';
 }
 
-.warning-button:hover {
+.warning-button:hover,
+.warning-button:focus {
     background-color: #dc3545;
     color: #fff;
 }
@@ -93,7 +100,8 @@ button {
     transition: transform 0.2s ease-in;
 }
 
-.warning-button:hover .text {
+.warning-button:hover .text,
+.warning-button:focus .text {
     transform: translateX(15px);
 }
 
@@ -107,7 +115,8 @@ button {
 }
 
 /*  same trick, but only find elements that are being hovered */
-.warning-border:has(.warning-button:hover) {
+.warning-border:has(.warning-button:hover),
+.warning-border:has(.warning-button:focus) {
     border-radius: 12px;
     padding: 4px;
     margin: 14px;
@@ -141,6 +150,10 @@ button {
     width: 100%;
 }
 
+.purchase-button:focus {
+    outline: solid 4px #28a745;
+}
+
 .purchase-button span {
     transition: transform 0.3s ease-out, color 0.2s ease-in;
 }
@@ -150,13 +163,15 @@ button {
     content: '';
 }
 
-.purchase-button:hover span {
+.purchase-button:hover span,
+.purchase-button:focus span {
     color: transparent;
     display: block;
     transform: translateY(-100%);
 }
 
-.purchase-button:hover .purchase-text span::after {
+.purchase-button:hover .purchase-text span::after,
+.purchase-button:focus .purchase-text span::after {
     display: flex;
     position: absolute;
     content: attr(data-replace);
