@@ -1,0 +1,111 @@
+/* Basic reset */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Google Sans Flex';
+    background-color: black;
+}
+
+.container {
+    margin: 0 auto;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #E9E9E9;
+    display: grid;
+    place-items: center;
+
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* default warning button style */
+.warning-button {
+    /* hides content outside the bounds of this element */
+    overflow: hidden;
+
+    text-transform: uppercase;
+    font-family: 'Google Sans Flex';
+    font-size: 1.5rem;
+
+    border: solid 2px #dc3545;
+    border-radius: 8px;
+    padding: 16px 32px;
+
+    transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
+
+    /* animated values */
+    background-color: transparent;
+    color: #dc3545;
+}
+
+/*  Animated '!', this could be a font-awesome icon or a spinner or something.
+    :before creates a pseudo element */
+.warning-button::before {
+    /* don't take up space in the layout */
+    position: absolute;
+    display: inline-block;
+    content: '!';
+
+    font-size: 2rem;
+
+    color: transparent;
+    transform: translate(-12px, -20px);
+
+    /* transition go on the base element */
+    transition: transform 0.4s ease-in-out, color 0.3s ease-in-out;
+}
+
+.warning-button:hover::before {
+    position: absolute;
+    display: inline-block;
+    content: '!';
+
+    transform: translate(-12px, -6px);
+    color: white;
+    pointer-events: none;
+
+}
+
+.warning-button:hover::before:hover {
+    position: absolute;
+    display: inline-block;
+    content: '!';
+}
+
+.warning-button:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.warning-button .text {
+    display: inline-block;
+    transition: transform 0.2s ease-in;
+}
+
+.warning-button:hover .text {
+    transform: translateX(15px);
+}
+
+/*  trick to select the parent of an element
+    we use this to set up the outer border */
+.warning-border:has(.warning-button) {
+    padding: 18px;
+    border: solid 4px #dc354600;
+}
+
+/*  same trick, but only find elements that are being hovered */
+.warning-border:has(.warning-button:hover) {
+    border-radius: 12px;
+    padding: 4px;
+    border: solid 4px #dc3546ff;
+    transition: padding 0.2s ease-out, border 0.4s ease-in-out;
+}
