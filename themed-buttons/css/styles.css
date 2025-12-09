@@ -13,12 +13,13 @@ body {
 .container {
     margin: 0 auto;
 
-    width: 100vw;
+    max-width: 700px;
     height: 100vh;
 
     background-color: #E9E9E9;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 
 }
 
@@ -39,6 +40,7 @@ button {
     border: solid 2px #dc3545;
     border-radius: 8px;
     padding: 16px 32px;
+    width: 100%;
 
     transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
 
@@ -99,13 +101,77 @@ button {
     we use this to set up the outer border */
 .warning-border:has(.warning-button) {
     padding: 18px;
+    margin: 0px;
     border: solid 4px #dc354600;
+    position: relative;
 }
 
 /*  same trick, but only find elements that are being hovered */
 .warning-border:has(.warning-button:hover) {
     border-radius: 12px;
     padding: 4px;
+    margin: 14px;
     border: solid 4px #dc3546ff;
-    transition: padding 0.2s ease-out, border 0.4s ease-in-out;
+    transition: padding 0.2s ease-out, border 0.4s ease-in-out, margin 0.2s ease-out;
+}
+
+.purchase-border {
+    width: 100%;
+    padding: 0px 18px;
+}
+
+.purchase-button {
+    /* hides content outside the bounds of this element */
+    overflow: hidden;
+
+    text-transform: uppercase;
+    font-family: 'Google Sans Flex';
+    font-size: 1.5rem;
+
+    border: solid 2px #28a745;
+    border-radius: 8px;
+    padding: 16px 32px;
+
+    transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
+
+    /* animated values */
+    background-color: transparent;
+    color: #28a745;
+
+    width: 100%;
+}
+
+.purchase-button span {
+    transition: transform 0.3s ease-out, color 0.2s ease-in;
+}
+
+.purchase-text span::after {
+    display: block;
+    content: '';
+}
+
+.purchase-button:hover span {
+    color: transparent;
+    display: block;
+    transform: translateY(-100%);
+}
+
+.purchase-button:hover .purchase-text span::after {
+    display: flex;
+    position: absolute;
+    content: attr(data-replace);
+    color: #28a745;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.purchase-button:active .purchase-text span::after {
+    display: flex;
+    position: absolute;
+    content: 'Heck yeah!';
+    color: #28a745;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
