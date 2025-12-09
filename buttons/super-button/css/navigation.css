@@ -1,0 +1,131 @@
+.main-nav {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+nav {
+    position: sticky;
+    top: 0px;
+    background-color: black;
+    border-radius: 0px 0px 8px 8px;
+
+    z-index: 100;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-nav ul {
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav ul li {
+    display: inline-block;
+    position: relative;
+
+    padding: 10px 15px;
+}
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: black;
+    border-radius: 4px;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    margin: 0;
+
+    z-index: -1;
+}
+
+.dropdown-menu li {
+    display: block;
+    min-width: 180px;
+}
+
+.dropdown-menu a {
+    border-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    text-align: left;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.dropdown-menu a:hover {
+    background-color: #333333;
+    transform: translateX(8px);
+}
+
+.dropdown-menu a:focus {
+    background-color: #333333;
+    transform: translateX(8px);
+}
+
+.dropdown-menu {
+    transform: translate(0px, 10%);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-in, visibility 0.3s;
+    visibility: hidden;
+}
+
+.dropdown-parent:hover .dropdown-menu {
+    transform: unset;
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-parent:focus-within .dropdown-menu {
+    transform: unset;
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-parent .fa-chevron-down {
+    margin: 20px;
+    transform: rotate(-90deg);
+    color: white;
+    transition: transform 0.3s ease-in-out;
+}
+
+.dropdown-parent:hover .fa-chevron-down {
+    transform: rotate(360deg) translateX(10px) scale(1.4);
+}
+
+.dropdown-parent:focus-within .fa-chevron-down {
+    transform: rotate(360deg) translateX(10px) scale(1.4);
+}
+
+
+nav .cog-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: red;
+    padding: 20px;
+}
+
+nav .fa-cog {
+    display: block;
+    font-size: 32px;
+    color: white;
+    width: 24px;
+}
+
+.navigation-button {
+    cursor: pointer;
+    min-width: 80px;
+    background-color: black;
+    border: none;
+}

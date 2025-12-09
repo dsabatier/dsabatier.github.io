@@ -1,128 +1,165 @@
-/* Basic reset */
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+:root {
+    /* Base Colors */
+    --color-body-bg: var(--color-body-bg);
+    --color-container-bg: #E9E9E9;
+    --color-text-light: #fff;
+
+    /* Warning Theme (Red) */
+    --color-warning: #dc3545;
+    /* The slightly different color for the border transition */
+    --color-warning-border-start: #dc354600;
+    --color-warning-border-end: #dc3546ff;
+
+    /* Purchase Theme (Green) */
+    --color-purchase: #28a745;
 }
 
+
+/* Basic reset */
+* {
+    /* box model goodness */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles, body and general container */
 body {
+    background-color: var(--color-body-bg);
     font-family: 'Google Sans Flex';
-    background-color: black;
 }
 
 .container {
+    /* layout setup */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    /* sizing and positioning */
+    height: 100vh;
+    max-width: 700px;
     margin: 0 auto;
 
-    max-width: 700px;
-    height: 100vh;
-
     background-color: #E9E9E9;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-
 }
 
+/* General button styles */
 button {
     cursor: pointer;
 }
 
+/*
+    -------------------------------------------
+    --- WARNING BUTTON STYLES ---
+    -------------------------------------------
+*/
 
 /* default warning button style */
 .warning-button {
+    /* sizing and padding */
+    width: 100%;
+    padding: 16px 32px;
+
+    /* typography */
+    font-family: 'Google Sans Flex';
+    font-size: 1.5rem;
+    text-transform: uppercase;
+
+    /* borders and background */
+    border: solid 2px var(--color-warning);
+    border-radius: 8px;
+
     /* hides content outside the bounds of this element */
     overflow: hidden;
 
-    text-transform: uppercase;
-    font-family: 'Google Sans Flex';
-    font-size: 1.5rem;
-
-    border: solid 2px #dc3545;
-    border-radius: 8px;
-    padding: 16px 32px;
-    width: 100%;
-
-    transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
-
     /* animated values */
     background-color: transparent;
-    color: #dc3545;
+    color: var(--color-warning);
+
+    /* transitions, make things smooth */
+    transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
 }
 
 .warning-button:focus {
     outline: none;
 }
 
-/*  Animated '!', this could be a font-awesome icon or a spinner or something.
-    :before creates a pseudo element */
+/*  Animated '!', this could be a font-awesome icon or a spinner or something.
+    :before creates a pseudo element */
 .warning-button::before {
     /* don't take up space in the layout */
     position: absolute;
     display: inline-block;
     content: '!';
 
+    /* typography */
     font-size: 2rem;
-
     color: transparent;
+
+    /* initial position */
     transform: translate(-12px, -20px);
 
     /* transition go on the base element */
     transition: transform 0.4s ease-in-out, color 0.3s ease-in-out;
 }
 
+/* the hover and focus styles for the button itself */
+.warning-button:hover,
+.warning-button:focus {
+    background-color: var(--color-warning);
+    color: #fff;
+}
+
+/* the hover and focus styles for the animated '!' */
 .warning-button:hover::before,
 .warning-button:focus::before {
     position: absolute;
     display: inline-block;
     content: '!';
+    pointer-events: none;
 
     transform: translate(-12px, -6px);
     color: white;
-    pointer-events: none;
-
 }
 
-.warning-button:hover::before:hover,
-.warning-button:focus::before:focus {
-    position: absolute;
-    display: inline-block;
-    content: '!';
-}
-
-.warning-button:hover,
-.warning-button:focus {
-    background-color: #dc3545;
-    color: #fff;
-}
-
+/* the text inside the button */
 .warning-button .text {
     display: inline-block;
     transition: transform 0.2s ease-in;
 }
 
+/* the text moving on hover/focus */
 .warning-button:hover .text,
 .warning-button:focus .text {
     transform: translateX(15px);
 }
 
-/*  trick to select the parent of an element
-    we use this to set up the outer border */
+/*  trick to select the parent of an element
+    we use this to set up the outer border */
 .warning-border:has(.warning-button) {
-    padding: 18px;
-    margin: 0px;
-    border: solid 4px #dc354600;
+    /* initial state */
     position: relative;
+    margin: 0px;
+    padding: 18px;
+    border: solid 4px var(--color-warning-border-start);
 }
 
-/*  same trick, but only find elements that are being hovered */
+/*  same trick, but only find elements that are being hovered or focused */
 .warning-border:has(.warning-button:hover),
 .warning-border:has(.warning-button:focus) {
-    border-radius: 12px;
-    padding: 4px;
+    /* final state */
     margin: 14px;
-    border: solid 4px #dc3546ff;
+    padding: 4px;
+    border-radius: 12px;
+    border: solid 4px var(--color-warning-border-end);
     transition: padding 0.2s ease-out, border 0.4s ease-in-out, margin 0.2s ease-out;
 }
+
+/*
+    -------------------------------------------
+    --- PURCHASE BUTTON STYLES ---
+    -------------------------------------------
+*/
 
 .purchase-border {
     width: 100%;
@@ -130,28 +167,32 @@ button {
 }
 
 .purchase-button {
+    /* sizing and padding */
+    width: 100%;
+    padding: 16px 32px;
+
+    /* typography */
+    font-family: 'Google Sans Flex';
+    font-size: 1.5rem;
+    text-transform: uppercase;
+
+    /* borders and background */
+    border: solid 2px var(--color-purchase);
+    border-radius: 8px;
+
     /* hides content outside the bounds of this element */
     overflow: hidden;
 
-    text-transform: uppercase;
-    font-family: 'Google Sans Flex';
-    font-size: 1.5rem;
-
-    border: solid 2px #28a745;
-    border-radius: 8px;
-    padding: 16px 32px;
-
-    transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
-
     /* animated values */
     background-color: transparent;
-    color: #28a745;
+    color: var(--color-purchase);
 
-    width: 100%;
+    /* transitions, make things smooth */
+    transition: background-color 0.2s ease-out, color 0.3s linear, transform 0.2s ease-in;
 }
 
 .purchase-button:focus {
-    outline: solid 4px #28a745;
+    outline: solid 4px var(--color-purchase);
 }
 
 .purchase-button span {
@@ -163,30 +204,41 @@ button {
     content: '';
 }
 
+/* purchase text moves up and hides on hover/focus */
 .purchase-button:hover span,
 .purchase-button:focus span {
-    color: transparent;
     display: block;
+    color: transparent;
     transform: translateY(-100%);
 }
 
+/* the replacement text slides in on hover/focus */
 .purchase-button:hover .purchase-text span::after,
 .purchase-button:focus .purchase-text span::after {
-    display: flex;
+    /* positioning and content */
     position: absolute;
     content: attr(data-replace);
-    color: #28a745;
+    /* uses the data-replace attribute value */
+
+    /* layout and styling */
+    display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    color: var(--color-purchase);
 }
 
+/* active (click) state for the replacement text */
 .purchase-button:active .purchase-text span::after {
-    display: flex;
+    /* positioning and content */
     position: absolute;
     content: 'Heck yeah!';
-    color: #28a745;
+    /* static message on click */
+
+    /* layout and styling */
+    display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    color: var(--color-purchase);
 }

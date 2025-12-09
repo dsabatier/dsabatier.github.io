@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch my Game (Server)",
+            "url": "http://localhost:5500/index.html", // Change to your server's URL and file path
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
