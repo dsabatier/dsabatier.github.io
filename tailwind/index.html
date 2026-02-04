@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <header>
+        <div class="p-4 bg-blue-800 text-white">
+            <h2 class="text-2xl">Sign-In</h2>
+        </div>
+    </header>
+    <main class="m-4 mx-auto max-w-3xl">
+        <div class="bg-blue-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
+            <form class="p-4 bg-white shadow-md text-gray">
+                <div class="flex flex-col">
+                    <label for="username" class="text-sm font-bold">Username</label>
+                    <input type="text" id="username"
+                        class="border block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 my-3 rounded border-gray-300">
+                </div>
+                <div class="flex flex-col md:flex-row space-between gap-4">
+                    <button type="button"
+                        class="cursor-pointer bg-blue-800 hover:bg-blue-700 p-4 rounded-md text-white font-bold">
+                        Sign In
+                    </button>
+                    <a href="#" class="p-4 hover:bg-gray-100 rounded text-center">Forgot Your Password?</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="p-4 bg-blue-800 text-white text-center">
+            &copy; 2026
+        </div>
+    </footer>
+</body>
+
+</html>
