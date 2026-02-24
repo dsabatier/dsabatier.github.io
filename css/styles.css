@@ -1,3 +1,9 @@
+.warning {
+    background-color: #FFC107;
+    border-radius: 8px;
+    padding: 16px;
+}
+
 :root {
     --padding-sm: 0.5rem;
     --padding-md: 1rem;
