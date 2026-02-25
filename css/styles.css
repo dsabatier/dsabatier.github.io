@@ -17,6 +17,12 @@
     --border-radius-sm: 0.5rem;
     --border-radius-md: 1rem;
     --border-radius-lg: 1.5rem;
+
+    /*
+        sm 576
+        md 768
+        lg 992 
+    */
 }
 
 .inner-container {
@@ -39,12 +45,23 @@ header {
     margin: var(--margin-lg) 0;
 }
 
+nav li:first-child {
+    margin-right: auto;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--padding-md);
+}
+
+@media (min-width: 768px) {
+    .nav ul {
+        flex-direction: row;
+    }
+
 }
 
 main img {
@@ -61,26 +78,47 @@ main img {
     border-radius: var(--border-radius-sm);
 }
 
-.service {
-    padding: var(--padding-sm);
-    margin: var(--margin-lg) 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-button {
+.cta {
     background-color: black;
     border-radius: 0.5rem;
     color: white;
     width: 100%;
     max-width: 400px;
     padding: var(--padding-md) var(--padding-lg);
+    text-align: center;
 }
 
-@media (min-width: 600px) {
+.services {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.service:first-child {
+    margin: var(--margin-lg) 0 var(--margin-md) 0;
+}
+
+.service {
+    padding: var(--padding-sm);
+    margin: var(--margin-md) 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.service-details {
+    max-width: 400px;
+}
+
+.service img {
+    display: inline;
+}
+
+@media (min-width: 768px) {
     .service {
         flex-direction: row;
     }
@@ -88,7 +126,12 @@ button {
     .service-details {
         margin: 0 var(--margin-md);
     }
+
+    .service:nth-child(2) {
+        flex-direction: row-reverse;
+    }
 }
+
 
 .card-grid {
     display: flex;
@@ -99,7 +142,7 @@ button {
     border: 1px solid #C9C9C9;
     border-radius: var(--border-radius-sm);
     padding: 24px;
-    max-width: 400px;
+    width: 100%;
     margin: var(--margin-md) 0;
 }
 
@@ -111,13 +154,15 @@ button {
     margin: var(--margin-md);
 }
 
-@media (min-width: 600px) {
+
+@media (min-width: 768px) {
     .card-grid {
         gap: 1rem;
     }
 
     .card {
         margin: 0;
+        max-width: 45%;
     }
 
     .card-header {}
