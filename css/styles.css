@@ -35,7 +35,7 @@ body {
     background-color: var(--color-yellow);
     color: #000;
     border-radius: var(--border-radius-md);
-    padding: var(--padding-md);
+    padding: var(--padding-md) var(--padding-lg) var(--padding-lg) var(--padding-lg);
     box-shadow: 8px 8px rgba(0, 0, 0, 1);
     font-weight: normal;
 }
