@@ -39,6 +39,12 @@
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--color-bg);
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0.04) 4px, transparent 4px),
+        radial-gradient(circle, rgba(0, 0, 0, 0.04) 4px, transparent 4px);
+    background-size: 64px 64px;
+    background-position: 0 0, 32px 32px;
+    background-attachment: fixed;
     color: var(--color-text);
     margin: 0;
     padding: 2rem 1rem 0 1rem;
