@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dominic Sabatier - UI Samples</title>
+    <link rel="stylesheet" href="css/modern-normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+    <header class="inner-container">
+        <h1>Dominic Sabatier</h1>
+        <!-- <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="websites.html">Websites</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav> -->
+    </header>
+
+    <main class="inner-container">
+        <div class="reel-section">
+            <h2>Art & Experiments</h2>
+            <p>A collection of standalone UI experiments.</p>
+
+            <div class="reel-container">
+
+                <div class="reel-item">
+                    <div class="reel-media">
+                        <video autoplay loop muted playsinline>
+                            <source src="media/fake3d.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="reel-content">
+                        <h3>Fake 3D Effect</h3>
+                        <p>An experiment creating a faux-3D effect in Unreal 5 UI. This works by using a custom HLSL
+                            node to warp the vertices of the quad and then applying a perspective transform to the
+                            texture. It's a neat trick to get a 3D effect without using a 3D model.</p>
+                    </div>
+                </div>
+
+                <div class="reel-item">
+                    <div class="reel-media">
+                        <video autoplay loop muted playsinline>
+                            <source src="media/lttp.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="reel-content">
+                        <h3>LTTP Remake UI</h3>
+                        <p>Menu system and heads-up display recreating the classic A Link to the Past aesthetic. Despite
+                            the low-res look, this is a fully functional menu system
+                            using Common UI + Enhanced Input to provide keyboard and controller support (including
+                            updating UI hints based on input type).</p>
+                    </div>
+                </div>
+
+                <div class="reel-item">
+                    <div class="reel-media">
+                        <video autoplay loop muted playsinline>
+                            <source src="media/menu.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="reel-content">
+                        <h3>Animated List View</h3>
+                        <p>An animated list view using Common UI and MVVM. Each 'option' has a VM, and the list has a VM
+                            holding those.</p>
+                    </div>
+                </div>
+
+                <div class="reel-item">
+                    <div class="halftone-header">
+                        <h3>Halftone Shader</h3>
+                        <p>A halftone shader implementation for the UI. Can be animated, rotated, scaled, and more.</p>
+                    </div>
+                    <div class="reel-media-list">
+                        <div class="reel-media">
+                            <img src="media/halftone-horizontal.png" alt="Halftone Horizontal"
+                                class="halftone-grid-img">
+                        </div>
+                        <div class="reel-content">
+                            <p>The shader is extracted into its own function, making it easy to apply to any UI
+                                material.</p>
+                        </div>
+                        <div class="reel-media">
+                            <img src="media/halftone-vertical.png" alt="Halftone Vertical" class="halftone-grid-img">
+                        </div>
+                        <div class="reel-content">
+                            <p>Any SDF can be passed in to create custom patterns (Square in this case).</p>
+                        </div>
+                        <div class="reel-media">
+                            <img src="media/halftone-animated.gif" alt="Animated Halftone Effect"
+                                class="halftone-grid-img">
+                        </div>
+                        <div class="reel-content">
+                            <p>Being computed on the GPU, we can animate it in interesting ways with very little cost.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>
+            Demos & Experiments For Students
+        </h2>
+        <p>I teach at a polytech college in Edmonton, Alberta. Here's a collection of UI components, layouts, and
+            animations and other noodlings I've put together to help students learn some concepts outside the regular
+            curriculum.</p>
+
+        <div class="ui-grid">
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>Buttons</h3>
+                    <p>Various button styles, interactions, and hover effects.</p>
+                    <a class="cta" href="demos/buttons/index.html" target="_blank">View Demo</a>
+                </div>
+            </div>
+
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>Themed Buttons</h3>
+                    <p>A set of buttons with different thematic styles and animations.</p>
+                    <a class="cta" href="demos/themed-buttons/index.html" target="_blank">View Demo</a>
+                </div>
+            </div>
+
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>Super Button</h3>
+                    <p>An advanced, highly interactive button component.</p>
+                    <a class="cta" href="demos/super-button/index.html" target="_blank">View Demo</a>
+                </div>
+            </div>
+
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>Keyframe Animation</h3>
+                    <p>Experiments with CSS keyframe sequences and dynamic animations.</p>
+                    <a class="cta" href="demos/keyframe-animation/index.html" target="_blank">View Demo</a>
+                </div>
+            </div>
+
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>CSS Layouts</h3>
+                    <p>Various structural layouts utilizing CSS Grid and Flexbox.</p>
+                    <a class="cta" href="demos/layouts/index.html" target="_blank">View Demo</a>
+                </div>
+            </div>
+
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>Tailwind Experiments</h3>
+                    <p>Examples built using the Tailwind CSS utility framework.</p>
+                    <a class="cta" href="demos/tailwind/index.html" target="_blank">View Demo</a>
+                </div>
+            </div>
+
+            <div class="ui-card">
+                <div class="ui-content">
+                    <h3>SalvageJS</h3>
+                    <p>A playable browser game demo to help students learn game loops, input handling, and object
+                        management in JavaScript.</p>
+                    <a class="cta" href="demos/SalvageJS/index.html" target="_blank">Play Game</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="#">Get In Touch?</a>
+    </footer>
+</body>
+
+</html>
