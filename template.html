@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header class="inner-container">
+    <app-header>
         <!-- Optional Warning block if needed
         <div class="warning">
             <h4>Hang on! I'm working on it!</h4>
@@ -20,16 +20,7 @@
             <i>~ Dom, Feb 25, 2026</i>
         </div>
         -->
-        <h1>Dominic Sabatier</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="websites.html">Websites</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    </app-header>
 
     <main class="inner-container">
         <h2>
@@ -41,10 +32,9 @@
 
     </main>
 
-    <footer>
-        <a href="#">Get In Touch?</a>
-        <!-- modal? form in footer? -->
-    </footer>
+    <app-footer></app-footer>
+
+    <script src="js/components.js"></script>
 </body>
 
 </html>

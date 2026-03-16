@@ -539,3 +539,8 @@ p {
     }
 
 }
+
+app-header,
+app-footer {
+    display: block;
+}

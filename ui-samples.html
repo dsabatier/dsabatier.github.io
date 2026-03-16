@@ -11,17 +11,7 @@
 </head>
 
 <body>
-    <header class="inner-container">
-        <h1>Dominic Sabatier</h1>
-        <!-- <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="websites.html">Websites</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav> -->
-    </header>
+    <app-header show-nav="false"></app-header>
 
     <main class="inner-container">
         <div class="reel-section">
@@ -32,7 +22,23 @@
 
                 <div class="reel-item">
                     <div class="reel-media">
-                        <video autoplay loop muted playsinline onclick="window.open('media/fake3d.mp4', '_blank')" style="cursor: pointer;">
+                        <video autoplay loop muted playsinline
+                            onclick="window.open('media/diagetic-dialog.mp4', '_blank')" style="cursor: pointer;">
+                            <source src="media/diagetic-dialog.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="reel-content">
+                        <h3>Diagetic Dialog</h3>
+                        <p>A complete dialog system, complete with full-featured, gamepad ready diagetic widgets
+                            supporting branching dialogs.</p>
+                    </div>
+                </div>
+
+                <div class="reel-item">
+                    <div class="reel-media">
+                        <video autoplay loop muted playsinline onclick="window.open('media/fake3d.mp4', '_blank')"
+                            style="cursor: pointer;">
                             <source src="media/fake3d.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -47,7 +53,8 @@
 
                 <div class="reel-item">
                     <div class="reel-media">
-                        <video autoplay loop muted playsinline onclick="window.open('media/lttp.mp4', '_blank')" style="cursor: pointer;">
+                        <video autoplay loop muted playsinline onclick="window.open('media/lttp.mp4', '_blank')"
+                            style="cursor: pointer;">
                             <source src="media/lttp.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -63,7 +70,8 @@
 
                 <div class="reel-item">
                     <div class="reel-media">
-                        <video autoplay loop muted playsinline onclick="window.open('media/menu.mp4', '_blank')" style="cursor: pointer;">
+                        <video autoplay loop muted playsinline onclick="window.open('media/menu.mp4', '_blank')"
+                            style="cursor: pointer;">
                             <source src="media/menu.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -107,76 +115,12 @@
                 </div>
             </div>
         </div>
-        <h2>
-            Demos & Experiments For Students
-        </h2>
-        <p>I teach at a polytech college in Edmonton, Alberta. Here's a collection of UI components, layouts, and
-            animations and other noodlings I've put together to help students learn some concepts outside the regular
-            curriculum.</p>
 
-        <div class="ui-grid">
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>Buttons</h3>
-                    <p>Various button styles, interactions, and hover effects.</p>
-                    <a class="cta" href="demos/buttons/index.html" target="_blank">View Demo</a>
-                </div>
-            </div>
-
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>Themed Buttons</h3>
-                    <p>A set of buttons with different thematic styles and animations.</p>
-                    <a class="cta" href="demos/themed-buttons/index.html" target="_blank">View Demo</a>
-                </div>
-            </div>
-
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>Super Button</h3>
-                    <p>An advanced, highly interactive button component.</p>
-                    <a class="cta" href="demos/super-button/index.html" target="_blank">View Demo</a>
-                </div>
-            </div>
-
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>Keyframe Animation</h3>
-                    <p>Experiments with CSS keyframe sequences and dynamic animations.</p>
-                    <a class="cta" href="demos/keyframe-animation/index.html" target="_blank">View Demo</a>
-                </div>
-            </div>
-
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>CSS Layouts</h3>
-                    <p>Various structural layouts utilizing CSS Grid and Flexbox.</p>
-                    <a class="cta" href="demos/layouts/index.html" target="_blank">View Demo</a>
-                </div>
-            </div>
-
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>Tailwind Experiments</h3>
-                    <p>Examples built using the Tailwind CSS utility framework.</p>
-                    <a class="cta" href="demos/tailwind/index.html" target="_blank">View Demo</a>
-                </div>
-            </div>
-
-            <div class="ui-card">
-                <div class="ui-content">
-                    <h3>SalvageJS</h3>
-                    <p>A playable browser game demo to help students learn game loops, input handling, and object
-                        management in JavaScript.</p>
-                    <a class="cta" href="demos/SalvageJS/index.html" target="_blank">Play Game</a>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <footer>
-        <a href="#">Get In Touch?</a>
-    </footer>
+    <app-footer></app-footer>
+
+    <script src="js/components.js"></script>
 </body>
 
 </html>
