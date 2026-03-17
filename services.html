@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Dominic Sabatier</title>
+    <meta name="description"
+        content="I'm Dominic Sabatier, a developer specializing in game UI and web development. Here's what I do and what my clients say.">
+    <link rel="stylesheet" href="css/modern-normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/services.css">
+</head>
+
+<body>
+    <app-header show-nav></app-header>
+
+    <main class="inner-container">
+
+        <!-- ========== HERO ========== -->
+        <section id="hero" aria-labelledby="hero-heading">
+            <h1 id="hero-heading">I Help You<br>Solve Your <span class="text-pink">UI.</span></h1>
+            <p>
+                Game UI is deceptively hard. Bad interfaces kill retention before the player even reaches your
+                best content. I make your UI feel effortless so your players keep coming back.
+            </p>
+            <div class="hero-actions">
+                <a href="#" id="contactLinkCta" class="cta" id="hero-cta">Get In Touch</a>
+                <a href="#services" class="hero-scroll-link" id="hero-scroll">Find Out How &darr;</a>
+            </div>
+        </section>
+
+        <!-- ========== TESTIMONIALS ========== -->
+        <section id="testimonials" aria-labelledby="testimonials-heading">
+            <h2 id="testimonials-heading">Testimonials</h2>
+            <p>People I've worked with say it better than I can.</p>
+
+            <div class="card-grid">
+
+                <article class="card" id="testimonial-1">
+                    <div class="card-header">
+                        <div class="avatar avatar--yellow">JK</div>
+                        <div>
+                            Jordan Kim<br>
+                            <span class="card-role">Founder, Foxlight Studio</span>
+                        </div>
+                    </div>
+                    <p>
+                        "We'd been shipping UI that technically worked but felt awful.
+                        Dominic came in, identified the core problems immediately, and delivered
+                        something our players actually commented on."
+                    </p>
+                </article>
+
+                <article class="card" id="testimonial-2">
+                    <div class="card-header">
+                        <div class="avatar avatar--pink">SP</div>
+                        <div>
+                            Sam Park<br>
+                            <span class="card-role">Lead Dev, Voidrift Games</span>
+                        </div>
+                    </div>
+                    <p>
+                        "Finding a developer who understands game UI specifically is almost impossible.
+                        Dominic understood our constraints from day one. We didn't have to
+                        explain why a 2-frame animation matters."
+                    </p>
+                </article>
+
+                <article class="card" id="testimonial-3">
+                    <div class="card-header">
+                        <div class="avatar avatar--green">RT</div>
+                        <div>
+                            Reina Torres<br>
+                            <span class="card-role">Art Director, Kaleid Interactive</span>
+                        </div>
+                    </div>
+                    <p>
+                        "We hired a general UX agency before this. They solved the wrong problems
+                        entirely. Dominic solved the right ones. Night and day difference."
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ========== SERVICES ========== -->
+        <section id="services" aria-labelledby="services-heading">
+            <h2 id="services-heading">What I Do</h2>
+            <p>Three ways I make your game's interface stop being a problem.</p>
+
+            <div class="services">
+
+                <!-- Row A -->
+                <div class="service">
+                    <div class="service-illustration service-illustration--blue">
+                        <img src="media/confusing-ui.jpg">
+                    </div>
+                    <div class="service-details">
+                        <h3>UI Is Harder Than It Looks</h3>
+                        <p>
+                            Most teams underestimate UI complexity until it's a problem.
+                            Inventory systems, HUD readability, menu flow, controller navigation.
+                            Each one is its own full feature to tackle. I've shipped them all and know where
+                            the landmines are.
+                        </p>
+                        <p class="service-note">I audit, prototype, and fix before it hits your players.</p>
+                    </div>
+                </div>
+
+                <!-- Row B -->
+                <div class="service">
+                    <div class="service-illustration service-illustration--pink">
+                        <img src="media/joystick.png" alt="Joystick">
+                    </div>
+                    <div class="service-details">
+                        <h3>I Speak Game</h3>
+                        <p>
+                            General UX designers often solve the wrong problem. They optimize for
+                            click-through rates and conversion funnels, not boss fight readability
+                            or inventory drag-and-drop feel.
+                        </p>
+                        <p class="service-note">
+                            I've played your genre. I know what your players expect and where
+                            to surprise them.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row C -->
+                <div class="service">
+                    <div class="service-illustration service-illustration--green">
+                        <img src="media/platforms.jpg" alt="Design and Implementation">
+                    </div>
+                    <div class="service-details">
+                        <h3>Design AND Implementation</h3>
+                        <p>
+                            I don't hand off a PDF and wave goodbye. I design it with you,
+                            build it, and integrate it in your project: Unity,
+                            Godot, Unreal, web or whatever you're using.
+                        </p>
+                        <p class="service-note">One person, full ownership, no handoff anxiety.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========== FREE AUDIT ========== -->
+        <section id="audit" aria-labelledby="audit-heading">
+            <div class="audit-block">
+                <p class="audit-eyebrow">Not sure where to start?</p>
+                <h2 id="audit-heading">Let's look at your<br>UI together, <b>free</b>.</h2>
+                <p>
+                    Book a 30-minute UI Audit call. I'll look at your current game,
+                    identify the top 3 things holding your UI back, and tell you exactly
+                    what I'd do. No pitch, no pressure.
+                </p>
+                <a href="mailto:dsabatier@gmail.com?subject=UI Audit Request" class="cta cta--yellow">
+                    Book a Free UI Audit
+                </a>
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <app-footer></app-footer>
+
+    <script src="js/components.js"></script>
+    <script>
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+
+    </script>
+</body>
+
+</html>

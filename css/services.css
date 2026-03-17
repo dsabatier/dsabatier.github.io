@@ -1,0 +1,247 @@
+/* ============================================================
+   services.css
+   Page-specific styles for services.html.
+   Uses design tokens and component classes from /css/styles.css.
+   ============================================================ */
+
+/* ---- Layout spacing for sections ---- */
+main > section {
+    padding: var(--padding-lg) 0;
+}
+
+/* ---- Hero ---- */
+.hero-badge {
+    display: inline-block;
+    background-color: var(--color-yellow);
+    border: 4px solid #000;
+    border-radius: 999px;
+    padding: 0.3rem 1.2rem;
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+    box-shadow: 4px 4px 0 #000;
+}
+
+#hero h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+}
+
+.text-pink {
+    color: var(--color-pink);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.hero-scroll-link {
+    font-weight: bold;
+    font-size: var(--font-size-lg);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-blue);
+    text-underline-offset: 4px;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+}
+
+.hero-scroll-link:hover {
+    color: var(--color-blue);
+}
+
+/* ---- Testimonial cards — meatblast style ---- */
+/* Extend the base .card from styles.css with a hard border */
+.card {
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 #000;
+}
+
+/* nth-child colors are already set in styles.css:
+   card:nth-child(1) = yellow, :nth-child(2) = pink, :nth-child(3) = green */
+.card:nth-child(2) .card-role {
+    opacity: 0.8;
+}
+
+.card-role {
+    font-size: var(--font-size-sm);
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+/* Avatar replaces the placeholder <img> in card-header */
+.avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    border: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+.avatar--yellow {
+    background-color: #000;
+    color: var(--color-yellow);
+}
+
+.avatar--pink {
+    background-color: #000;
+    color: var(--color-pink);
+}
+
+.avatar--green {
+    background-color: #000;
+    color: var(--color-green);
+}
+
+/* ---- Services — SVG illustration boxes ---- */
+.service-illustration {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 280px;
+    border: 4px solid #000;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 6px 6px 0 #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.service-illustration img,
+.service-illustration svg {
+    width: 100%;
+    display: block;
+}
+
+.service-illustration svg {
+    max-width: 200px;
+    height: auto;
+    padding: 2rem;
+}
+
+.service-illustration img {
+    border: none;
+    box-shadow: none;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+}
+
+.service-illustration--blue {
+    background-color: var(--color-blue);
+}
+
+.service-illustration--pink {
+    background-color: var(--color-pink);
+}
+
+.service-illustration--green {
+    background-color: var(--color-green);
+}
+
+/* service-note is the smaller secondary paragraph inside each service */
+.service-note {
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+    color: var(--color-text);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+}
+
+/* ---- Audit block ---- */
+.audit-block {
+    background-color: var(--color-purple);
+    color: #fff;
+    border: 4px solid #000;
+    border-radius: var(--border-radius-lg);
+    padding: var(--padding-lg);
+    text-align: center;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.audit-block h2 {
+    color: #fff;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.audit-block p {
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+}
+
+.audit-eyebrow {
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+}
+
+/* Yellow CTA variant for audit block */
+.cta--yellow {
+    background-color: var(--color-yellow);
+    color: #000;
+    box-shadow: 6px 8px rgba(255, 214, 0, 0.3);
+}
+
+.cta--yellow:hover {
+    background-color: var(--color-green);
+    color: #000;
+    box-shadow: 6px 11px rgba(0, 230, 118, 0.2);
+}
+
+/* ---- Closer block ---- */
+.closer-block {
+    background-color: var(--color-yellow);
+    border: 4px solid #000;
+    border-radius: var(--border-radius-lg);
+    padding: var(--padding-lg);
+    text-align: center;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.closer-block h2 {
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.closer-block p {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+/* ---- Scroll-reveal ---- */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

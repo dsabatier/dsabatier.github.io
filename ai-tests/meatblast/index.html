@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meatblast Games — We Help You Solve Your UI</title>
+  <meta name="description" content="Meatblast Games is a UI/UX design and implementation studio specializing in game interfaces. We help game studios of all sizes ship UI that players love." />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            pink: { DEFAULT: '#ec4899', 500: '#ec4899' },
+            blue: { DEFAULT: '#3b82f6', 500: '#3b82f6' },
+            yellow: { DEFAULT: '#facc15', 400: '#facc15' },
+            green: { DEFAULT: '#22c55e', 500: '#22c55e' },
+            purple: { DEFAULT: '#7c3aed', 600: '#7c3aed' },
+          },
+          boxShadow: {
+            hard: '4px 4px 0px 0px #000000',
+            'hard-lg': '6px 6px 0px 0px #000000',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* Dot-grid background */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f3f4f6;
+      background-image: radial-gradient(circle, #9ca3af 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Hard shadow lift on hover for interactive cards/buttons */
+    .btn-primary {
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .btn-primary:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px 0px #000;
+    }
+    .btn-primary:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px 0px #000;
+    }
+
+    .card-hover {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card-hover:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 7px 7px 0px 0px #000;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger > *:nth-child(1) { transition-delay: 0ms; }
+    .stagger > *:nth-child(2) { transition-delay: 80ms; }
+    .stagger > *:nth-child(3) { transition-delay: 160ms; }
+    .stagger > *:nth-child(4) { transition-delay: 240ms; }
+  </style>
+</head>
+
+<body class="text-black">
+
+  <!-- ========== NAV ========== -->
+  <header class="sticky top-0 z-50 bg-gray-100 border-b-4 border-black">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" id="nav-logo" class="text-xl font-black tracking-tight">
+        <span class="text-pink-500">Meat</span>blast Games
+      </a>
+      <nav class="hidden sm:flex items-center gap-6 font-bold text-sm">
+        <a id="nav-services" href="#services" class="hover:text-pink-500 transition-colors">Services</a>
+        <a id="nav-testimonials" href="#testimonials" class="hover:text-pink-500 transition-colors">Testimonials</a>
+        <a
+          id="nav-cta"
+          href="mailto:hello@meatblastgames.com"
+          class="btn-primary bg-blue-500 text-white border-4 border-black shadow-hard rounded-xl px-5 py-2 text-sm font-black uppercase tracking-wide"
+        >Get In Touch</a>
+      </nav>
+      <!-- Mobile CTA -->
+      <a
+        id="nav-cta-mobile"
+        href="mailto:hello@meatblastgames.com"
+        class="sm:hidden btn-primary bg-blue-500 text-white border-4 border-black shadow-hard rounded-xl px-4 py-2 text-xs font-black uppercase"
+      >Get In Touch</a>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6">
+
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="py-16 md:py-24" aria-labelledby="hero-heading">
+      <div class="flex flex-col md:flex-row items-center gap-10">
+
+        <!-- Left: Copy -->
+        <div class="flex-1 reveal">
+          <span
+            id="hero-badge"
+            class="inline-block bg-yellow-400 border-4 border-black shadow-hard rounded-full px-4 py-1 text-sm font-black uppercase mb-6"
+          >Game UI Specialists</span>
+          <h1 id="hero-heading" class="text-5xl md:text-6xl font-black leading-tight mb-5">
+            We Help You<br />Solve Your <span class="text-pink-500">UI.</span>
+          </h1>
+          <p class="text-gray-700 text-lg font-medium leading-relaxed mb-8 max-w-md">
+            Game UI is deceptively hard. Bad interfaces kill retention before the player even reaches your best content.
+            We make your UI feel effortless.
+          </p>
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <a
+              id="hero-cta"
+              href="mailto:hello@meatblastgames.com"
+              class="btn-primary bg-pink-500 text-white border-4 border-black shadow-hard rounded-xl px-8 py-4 font-black text-base uppercase tracking-wide"
+            >Get In Touch</a>
+            <a
+              id="hero-scroll"
+              href="#services"
+              class="font-bold text-base underline underline-offset-4 hover:text-blue-500 transition-colors"
+            >Find Out How &darr;</a>
+          </div>
+        </div>
+
+        <!-- Right: Flat Cartoony Illustration -->
+        <div class="flex-1 reveal flex justify-center">
+          <div
+            id="hero-illustration"
+            class="bg-white border-4 border-black shadow-hard-lg rounded-3xl p-8 w-full max-w-sm"
+            aria-hidden="true"
+          >
+            <!-- Flat SVG game HUD illustration -->
+            <svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg" class="w-full">
+              <!-- Screen bezel -->
+              <rect x="10" y="10" width="320" height="200" rx="16" fill="#c4b5fd" stroke="#000" stroke-width="4"/>
+              <!-- Screen interior -->
+              <rect x="22" y="22" width="296" height="176" rx="10" fill="#1e1b4b"/>
+
+              <!-- Health bar label -->
+              <text x="34" y="50" font-family="monospace" font-size="11" fill="#f9fafb" font-weight="bold">HP</text>
+              <!-- Health bar bg -->
+              <rect x="55" y="40" width="120" height="14" rx="7" fill="#374151"/>
+              <!-- Health bar fill -->
+              <rect x="55" y="40" width="90" height="14" rx="7" fill="#22c55e"/>
+
+              <!-- Mana bar label -->
+              <text x="34" y="72" font-family="monospace" font-size="11" fill="#f9fafb" font-weight="bold">MP</text>
+              <!-- Mana bar bg -->
+              <rect x="55" y="62" width="120" height="14" rx="7" fill="#374151"/>
+              <!-- Mana bar fill -->
+              <rect x="55" y="62" width="60" height="14" rx="7" fill="#3b82f6"/>
+
+              <!-- Minimap box -->
+              <rect x="244" y="34" width="60" height="60" rx="8" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+              <!-- Minimap dot player -->
+              <circle cx="274" cy="64" r="5" fill="#ec4899"/>
+              <!-- Minimap dot enemy -->
+              <circle cx="258" cy="55" r="3" fill="#ef4444"/>
+              <circle cx="287" cy="73" r="3" fill="#ef4444"/>
+
+              <!-- Crosshair -->
+              <line x1="155" y1="115" x2="185" y2="115" stroke="#facc15" stroke-width="3"/>
+              <line x1="170" y1="100" x2="170" y2="130" stroke="#facc15" stroke-width="3"/>
+              <circle cx="170" cy="115" r="12" stroke="#facc15" stroke-width="3" fill="none"/>
+
+              <!-- Skill icons row -->
+              <rect x="34" y="160" width="36" height="32" rx="6" fill="#7c3aed" stroke="#000" stroke-width="2"/>
+              <text x="52" y="181" font-size="16" text-anchor="middle" font-family="sans-serif">&#9889;</text>
+
+              <rect x="78" y="160" width="36" height="32" rx="6" fill="#ec4899" stroke="#000" stroke-width="2"/>
+              <text x="96" y="181" font-size="16" text-anchor="middle" font-family="sans-serif">&#128293;</text>
+
+              <rect x="122" y="160" width="36" height="32" rx="6" fill="#3b82f6" stroke="#000" stroke-width="2"/>
+              <text x="140" y="181" font-size="16" text-anchor="middle" font-family="sans-serif">&#10052;</text>
+
+              <rect x="166" y="160" width="36" height="32" rx="6" fill="#22c55e" stroke="#000" stroke-width="2"/>
+              <text x="184" y="181" font-size="16" text-anchor="middle" font-family="sans-serif">&#9881;</text>
+
+              <!-- Score -->
+              <text x="230" y="175" font-family="monospace" font-size="13" fill="#facc15" font-weight="bold" text-anchor="middle">SCORE</text>
+              <text x="230" y="190" font-family="monospace" font-size="13" fill="#f9fafb" font-weight="bold" text-anchor="middle">041,320</text>
+
+              <!-- Confused face label below screen -->
+              <text x="170" y="240" font-size="15" font-family="Plus Jakarta Sans, sans-serif" font-weight="900" fill="#000" text-anchor="middle">Your UI could feel this good.</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section id="testimonials" class="py-16" aria-labelledby="testimonials-heading">
+      <h2 id="testimonials-heading" class="text-4xl font-black mb-3 reveal">Testimonials</h2>
+      <p class="text-gray-600 font-medium mb-10 reveal">Studios we've worked with say it better than we can.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+
+        <!-- Card 1 -->
+        <article
+          id="testimonial-1"
+          class="reveal card-hover bg-yellow-400 border-4 border-black shadow-hard rounded-2xl p-6"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-yellow-400 font-black text-sm border-2 border-black">JK</div>
+            <div>
+              <p class="font-black text-sm leading-tight">Jordan Kim</p>
+              <p class="text-xs font-medium opacity-70">Founder, Foxlight Studio</p>
+            </div>
+          </div>
+          <p class="font-medium text-sm leading-relaxed">
+            "We'd been shipping UI that technically worked but felt awful.
+            Meatblast came in, identified the core problems immediately, and delivered
+            something our players actually commented on — positively."
+          </p>
+        </article>
+
+        <!-- Card 2 -->
+        <article
+          id="testimonial-2"
+          class="reveal card-hover bg-pink-500 text-white border-4 border-black shadow-hard rounded-2xl p-6"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-pink-500 font-black text-sm border-2 border-black">SP</div>
+            <div>
+              <p class="font-black text-sm leading-tight">Sam Park</p>
+              <p class="text-xs font-medium opacity-80">Lead Dev, Voidrift Games</p>
+            </div>
+          </div>
+          <p class="font-medium text-sm leading-relaxed">
+            "Finding a designer who understands game UI specifically is almost impossible.
+            Meatblast understood our constraints from day one — we didn't have to
+            explain why a 2-frame animation matters."
+          </p>
+        </article>
+
+        <!-- Card 3 -->
+        <article
+          id="testimonial-3"
+          class="reveal card-hover bg-green-500 border-4 border-black shadow-hard rounded-2xl p-6"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-green-500 font-black text-sm border-2 border-black">RT</div>
+            <div>
+              <p class="font-black text-sm leading-tight">Reina Torres</p>
+              <p class="text-xs font-medium opacity-70">Art Director, Kaleid Interactive</p>
+            </div>
+          </div>
+          <p class="font-medium text-sm leading-relaxed">
+            "We hired a general UX agency before this. They solved the wrong problems
+            entirely. Meatblast solved the right ones — fast. Night and day difference."
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== SERVICES / BENEFITS (alternating) ========== -->
+    <section id="services" class="py-16" aria-labelledby="services-heading">
+      <h2 id="services-heading" class="text-4xl font-black mb-3 reveal">What We Do</h2>
+      <p class="text-gray-600 font-medium mb-12 reveal">
+        Three ways we make your game's interface stop being a problem.
+      </p>
+
+      <!-- Row A: Illustration LEFT, text RIGHT -->
+      <div class="flex flex-col md:flex-row items-center gap-10 mb-16 reveal">
+        <div class="flex-1 flex justify-center">
+          <div class="bg-blue-500 border-4 border-black shadow-hard rounded-3xl p-8 w-full max-w-xs flex items-center justify-center">
+            <!-- Tangled wires / confusion illustration -->
+            <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[200px]">
+              <!-- Tangled path lines -->
+              <path d="M30,40 C80,20 120,100 60,90 S140,170 170,140" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <path d="M20,130 C70,90 110,140 80,110 S160,50 170,80" stroke="#facc15" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <path d="M50,160 C90,120 130,60 110,90 S60,20 150,30" stroke="#ec4899" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <!-- Confused face in center -->
+              <circle cx="100" cy="90" r="35" fill="white" stroke="#000" stroke-width="4"/>
+              <circle cx="88" cy="82" r="4" fill="#000"/>
+              <circle cx="112" cy="82" r="4" fill="#000"/>
+              <!-- Wobbly/confused mouth -->
+              <path d="M88,105 Q100,98 112,105" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- Sweat drop -->
+              <ellipse cx="128" cy="73" rx="5" ry="7" fill="#3b82f6" stroke="#000" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-black mb-3 text-pink-500">UI Is Harder Than It Looks</h3>
+          <p class="text-gray-700 font-medium leading-relaxed mb-4">
+            Most teams underestimate UI complexity until it's a problem.
+            Inventory systems, HUD readability, menu flow, controller navigation —
+            each one is its own discipline. We've shipped them all and know where the
+            landmines are.
+          </p>
+          <p class="text-gray-600 text-sm font-medium">
+            We audit, prototype, and fix before it hits your players.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row B: text LEFT, illustration RIGHT -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-10 mb-16 reveal">
+        <div class="flex-1 flex justify-center">
+          <div class="bg-pink-500 border-4 border-black shadow-hard rounded-3xl p-8 w-full max-w-xs flex items-center justify-center">
+            <!-- Game controller illustration -->
+            <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[200px]">
+              <!-- Controller body -->
+              <ellipse cx="100" cy="90" rx="80" ry="50" fill="#fff" stroke="#000" stroke-width="4"/>
+              <!-- Left grip -->
+              <ellipse cx="40" cy="115" rx="28" ry="22" fill="#fff" stroke="#000" stroke-width="4"/>
+              <!-- Right grip -->
+              <ellipse cx="160" cy="115" rx="28" ry="22" fill="#fff" stroke="#000" stroke-width="4"/>
+              <!-- D-Pad -->
+              <rect x="45" y="80" width="14" height="36" rx="4" fill="#000"/>
+              <rect x="31" y="94" width="42" height="14" rx="4" fill="#000"/>
+              <!-- Face buttons -->
+              <circle cx="145" cy="78" r="7" fill="#facc15" stroke="#000" stroke-width="2"/>
+              <circle cx="159" cy="92" r="7" fill="#ec4899" stroke="#000" stroke-width="2"/>
+              <circle cx="131" cy="92" r="7" fill="#3b82f6" stroke="#000" stroke-width="2"/>
+              <circle cx="145" cy="106" r="7" fill="#22c55e" stroke="#000" stroke-width="2"/>
+              <!-- Stars -->
+              <text x="85" y="35" font-size="18" text-anchor="middle">&#11088;</text>
+              <text x="115" y="30" font-size="14" text-anchor="middle">&#10024;</text>
+              <text x="70" y="28" font-size="12" text-anchor="middle">&#11088;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-black mb-3 text-blue-500">We Speak Game</h3>
+          <p class="text-gray-700 font-medium leading-relaxed mb-4">
+            General UX designers often solve the wrong problem. They optimize for
+            click-through rates and conversion funnels — not boss fight readability or
+            inventory drag-and-drop feel.
+          </p>
+          <p class="text-gray-600 text-sm font-medium">
+            We've played your genre. We know what your players expect — and where
+            to surprise them.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row C: Illustration LEFT, text RIGHT -->
+      <div class="flex flex-col md:flex-row items-center gap-10 reveal">
+        <div class="flex-1 flex justify-center">
+          <div class="bg-green-500 border-4 border-black shadow-hard rounded-3xl p-8 w-full max-w-xs flex items-center justify-center">
+            <!-- Layered panels illustration -->
+            <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[200px]">
+              <!-- Back panel -->
+              <rect x="20" y="30" width="130" height="90" rx="10" fill="#c4b5fd" stroke="#000" stroke-width="3"/>
+              <!-- Mid panel -->
+              <rect x="40" y="55" width="130" height="90" rx="10" fill="#fde68a" stroke="#000" stroke-width="3"/>
+              <!-- Front panel -->
+              <rect x="60" y="80" width="120" height="70" rx="10" fill="#fff" stroke="#000" stroke-width="3"/>
+              <!-- Code lines on front -->
+              <rect x="74" y="96" width="70" height="6" rx="3" fill="#3b82f6"/>
+              <rect x="74" y="110" width="50" height="6" rx="3" fill="#ec4899"/>
+              <rect x="74" y="124" width="80" height="6" rx="3" fill="#22c55e"/>
+              <!-- Pencil icon -->
+              <text x="158" y="168" font-size="26" text-anchor="middle">&#9999;</text>
+            </svg>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-black mb-3 text-green-500">Design AND Implementation</h3>
+          <p class="text-gray-700 font-medium leading-relaxed mb-4">
+            We don't hand off a Figma file and wave goodbye. We design it,
+            build it, and integrate it. Our work ships in your engine — Unity,
+            Godot, Unreal, web — whatever you're using.
+          </p>
+          <p class="text-gray-600 text-sm font-medium">
+            One team, full ownership, no handoff anxiety.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========== AHA MOMENT: FREE UI AUDIT ========== -->
+    <section id="audit" class="py-16 reveal" aria-labelledby="audit-heading">
+      <div class="bg-purple-600 border-4 border-black shadow-hard-lg rounded-3xl p-10 md:p-14 text-center text-white">
+        <p class="text-sm font-black uppercase tracking-widest mb-3 opacity-80">Not sure where to start?</p>
+        <h2 id="audit-heading" class="text-4xl md:text-5xl font-black mb-5 leading-tight">
+          Let's look at your<br />UI together — free.
+        </h2>
+        <p class="text-lg font-medium opacity-90 mb-8 max-w-xl mx-auto">
+          Book a 30-minute UI Audit call. We'll look at your current game,
+          identify the top 3 things holding your UI back, and tell you exactly
+          what we'd do. No pitch, no pressure.
+        </p>
+        <a
+          id="audit-cta"
+          href="mailto:hello@meatblastgames.com?subject=UI Audit Request"
+          class="btn-primary inline-block bg-yellow-400 text-black border-4 border-black shadow-hard rounded-xl px-10 py-4 font-black text-base uppercase tracking-wide"
+        >Book a Free UI Audit</a>
+      </div>
+    </section>
+
+    <!-- ========== CLOSER ========== -->
+    <section id="closer" class="py-16 reveal" aria-labelledby="closer-heading">
+      <div class="bg-yellow-400 border-4 border-black shadow-hard-lg rounded-3xl p-10 md:p-14 text-center">
+        <h2 id="closer-heading" class="text-4xl md:text-5xl font-black mb-4 leading-tight">
+          Ready to fix your UI?
+        </h2>
+        <p class="text-xl font-bold mb-8">Your players will thank you.</p>
+        <a
+          id="closer-cta"
+          href="mailto:hello@meatblastgames.com"
+          class="btn-primary inline-block bg-blue-500 text-white border-4 border-black shadow-hard rounded-xl px-10 py-4 font-black text-base uppercase tracking-wide"
+        >Get In Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="border-t-4 border-black mt-8 py-8">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-black text-sm">
+        <span class="text-pink-500">Meat</span>blast Games
+      </p>
+      <nav class="flex items-center gap-6 text-sm font-bold" aria-label="Footer navigation">
+        <a id="footer-services" href="#services" class="hover:text-pink-500 transition-colors">Services</a>
+        <a id="footer-testimonials" href="#testimonials" class="hover:text-pink-500 transition-colors">Testimonials</a>
+        <a id="footer-contact" href="mailto:hello@meatblastgames.com" class="hover:text-blue-500 transition-colors">Contact</a>
+      </nav>
+      <p class="text-xs text-gray-500 font-medium">&copy; 2026 Meatblast Games</p>
+    </div>
+  </footer>
+
+  <!-- ========== SCROLL REVEAL SCRIPT ========== -->
+  <script>
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
