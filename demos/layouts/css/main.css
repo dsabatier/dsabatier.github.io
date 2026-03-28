@@ -16,6 +16,7 @@ body {
     font-family: 'SUSE', sans-serif;
     margin: 0;
     padding: 0;
+    color: var(--white);
 }
 
 h1,

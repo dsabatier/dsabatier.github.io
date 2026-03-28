@@ -16,9 +16,7 @@
     <app-header show-nav></app-header>
 
     <main class="inner-container">
-
-        <!-- ========== HERO ========== -->
-        <section id="hero" aria-labelledby="hero-heading">
+        <section id="hero">
             <h1 id="hero-heading">I Help You<br>Solve Your <span class="text-pink">UI.</span></h1>
             <p>
                 Game UI is deceptively hard. Bad interfaces kill retention before the player even reaches your
@@ -30,7 +28,6 @@
             </div>
         </section>
 
-        <!-- ========== TESTIMONIALS ========== -->
         <section id="testimonials" aria-labelledby="testimonials-heading">
             <h2 id="testimonials-heading">Testimonials</h2>
             <p>People I've worked with say it better than I can.</p>
@@ -84,14 +81,12 @@
             </div>
         </section>
 
-        <!-- ========== SERVICES ========== -->
         <section id="services" aria-labelledby="services-heading">
             <h2 id="services-heading">What I Do</h2>
             <p>Three ways I make your game's interface stop being a problem.</p>
 
             <div class="services">
 
-                <!-- Row A -->
                 <div class="service">
                     <div class="service-illustration service-illustration--blue">
                         <img src="media/confusing-ui.jpg">
@@ -108,7 +103,6 @@
                     </div>
                 </div>
 
-                <!-- Row B -->
                 <div class="service">
                     <div class="service-illustration service-illustration--pink">
                         <img src="media/joystick.png" alt="Joystick">
@@ -127,7 +121,6 @@
                     </div>
                 </div>
 
-                <!-- Row C -->
                 <div class="service">
                     <div class="service-illustration service-illustration--green">
                         <img src="media/platforms.jpg" alt="Design and Implementation">
@@ -146,7 +139,6 @@
             </div>
         </section>
 
-        <!-- ========== FREE AUDIT ========== -->
         <section id="audit" aria-labelledby="audit-heading">
             <div class="audit-block">
                 <p class="audit-eyebrow">Not sure where to start?</p>
@@ -169,21 +161,6 @@
     <app-footer></app-footer>
 
     <script src="js/components.js"></script>
-    <script>
-        const revealEls = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-        revealEls.forEach((el) => observer.observe(el));
-
-    </script>
 </body>
 
 </html>
