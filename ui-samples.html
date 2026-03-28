@@ -21,9 +21,8 @@
             <div class="reel-container">
 
                 <div class="reel-item">
-                    <div class="reel-media">
-                        <video autoplay loop muted playsinline
-                            onclick="window.open('media/diagetic-dialog.mp4', '_blank')" style="cursor: pointer;">
+                    <div class="reel-media" onclick="openMedia('media/diagetic-dialog.mp4', 'video')">
+                        <video autoplay loop muted playsinline>
                             <source src="media/diagetic-dialog.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -32,13 +31,18 @@
                         <h3>Diagetic Dialog</h3>
                         <p>A complete dialog system with full-featured, gamepad ready, diagetic widgets
                             supporting branching dialogs.</p>
+                        <div class="tag-container">
+                            <span class="tag engine">Unreal</span>
+                            <span class="tag skill">UX Design</span>
+                            <span class="tag skill">Common UI</span>
+                            <span class="tag skill">Enhanced Input</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="reel-item">
-                    <div class="reel-media">
-                        <video autoplay loop muted playsinline onclick="window.open('media/fake3d.mp4', '_blank')"
-                            style="cursor: pointer;">
+                    <div class="reel-media" onclick="openMedia('media/fake3d.mp4', 'video')">
+                        <video autoplay loop muted playsinline>
                             <source src="media/fake3d.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -48,13 +52,17 @@
                         <p>An experiment creating a faux-3D effect in Unreal 5 UI. This works by using a custom HLSL
                             node to warp the vertices of the quad and then applying a perspective transform to the
                             texture. It's a neat trick to get a 3D effect without using a 3D model.</p>
+                        <div class="tag-container">
+                            <span class="tag engine">Unreal</span>
+                            <span class="tag skill">HLSL</span>
+                            <span class="tag skill">UI Materials</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="reel-item">
-                    <div class="reel-media">
-                        <video autoplay loop muted playsinline onclick="window.open('media/lttp.mp4', '_blank')"
-                            style="cursor: pointer;">
+                    <div class="reel-media" onclick="openMedia('media/lttp.mp4', 'video')">
+                        <video autoplay loop muted playsinline>
                             <source src="media/lttp.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -65,13 +73,18 @@
                             the low-res look, this is a fully functional menu system
                             using Common UI + Enhanced Input to provide keyboard and controller support (including
                             updating UI hints based on input type).</p>
+                        <div class="tag-container">
+                            <span class="tag engine">Unreal</span>
+                            <span class="tag skill">UX Design</span>
+                            <span class="tag skill">Common UI</span>
+                            <span class="tag skill">Enhanced Input</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="reel-item">
-                    <div class="reel-media">
-                        <video autoplay loop muted playsinline onclick="window.open('media/menu.mp4', '_blank')"
-                            style="cursor: pointer;">
+                    <div class="reel-media" onclick="openMedia('media/menu.mp4', 'video')">
+                        <video autoplay loop muted playsinline>
                             <source src="media/menu.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -80,6 +93,11 @@
                         <h3>Animated List View</h3>
                         <p>An animated list view using Common UI and MVVM. Each 'option' has a VM, and the list has a VM
                             holding those.</p>
+                        <div class="tag-container">
+                            <span class="tag engine">Unreal</span>
+                            <span class="tag skill">Common UI</span>
+                            <span class="tag skill">MVVM</span>
+                        </div>
                     </div>
                 </div>
 
@@ -88,9 +106,14 @@
                         <h3>Halftone Material</h3>
                         <p>A halftone material implementation for the UI. Can be animated, rotated, scaled, and more.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag engine">Unreal</span>
+                            <span class="tag skill">SDF</span>
+                            <span class="tag skill">UI Materials</span>
+                        </div>
                     </div>
                     <div class="reel-media-list">
-                        <div class="reel-media">
+                        <div class="reel-media" onclick="openMedia('media/halftone-horizontal.png', 'image')">
                             <img src="media/halftone-horizontal.png" alt="Halftone Horizontal"
                                 class="halftone-grid-img">
                         </div>
@@ -98,13 +121,13 @@
                             <p>The effect is extracted into its own function, making it easy to apply to any UI
                                 material.</p>
                         </div>
-                        <div class="reel-media">
+                        <div class="reel-media" onclick="openMedia('media/halftone-vertical.png', 'image')">
                             <img src="media/halftone-vertical.png" alt="Halftone Vertical" class="halftone-grid-img">
                         </div>
                         <div class="reel-content">
                             <p>Any SDF can be passed in to create custom patterns (Square in this case).</p>
                         </div>
-                        <div class="reel-media">
+                        <div class="reel-media" onclick="openMedia('media/halftone-animated.gif', 'image')">
                             <img src="media/halftone-animated.gif" alt="Animated Halftone Effect"
                                 class="halftone-grid-img">
                         </div>
@@ -115,13 +138,9 @@
                     </div>
                 </div>
                 <div class="reel-item">
-                    <div class="reel-media">
-                        <a href="https://www.figma.com/proto/G97ie5AayIYdaGAeTGRQNx/Inventory?node-id=0-1&t=geGz4Ovt31nfFkEE-1"
-                            target="_blank" rel="noopener noreferrer">
-                            <div class="reel-media">
-                                <img src="media/inventory-figma-prototype.png" alt="Inventory Figma Prototype">
-                            </div>
-                        </a>
+                    <div class="reel-media" style="--expand-text: 'Go to Figma';"
+                        onclick="window.open('https://www.figma.com/proto/G97ie5AayIYdaGAeTGRQNx/Inventory?node-id=0-1&t=geGz4Ovt31nfFkEE-1', '_blank')">
+                        <img src="media/inventory-figma-prototype.png" alt="Inventory Figma Prototype">
                     </div>
                     <div class="reel-content">
                         <h3>Figma Inventory Flow Prototype</h3>
@@ -129,6 +148,11 @@
                             gamepad.
                         </p>
                         <p>Try it out with a gamepad! (Try gamepad face buttons for inventory actions)</p>
+                        <div class="tag-container">
+                            <span class="tag engine">Figma</span>
+                            <span class="tag skill">UX Design</span>
+                            <span class="tag skill">Prototyping</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,6 +161,23 @@
 
     <app-footer></app-footer>
 
+    <dialog id="media-modal" onclick="this.close()">
+        <div id="modal-target" style="pointer-events: none;"></div>
+    </dialog>
+
+    <script>
+        const modal = document.getElementById('media-modal');
+        const target = document.getElementById('modal-target');
+
+        function openMedia(src, type) {
+            target.innerHTML = type === 'video'
+                ? `<video src="${src}" autoplay loop muted controls style="pointer-events: auto;"></video>`
+                : `<img src="${src}" style="pointer-events: auto;">`;
+            modal.showModal();
+        }
+
+        modal.addEventListener('close', () => { target.innerHTML = ''; });
+    </script>
     <script src="js/components.js"></script>
 </body>
 
