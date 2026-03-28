@@ -21,7 +21,7 @@
             <div class="reel-container">
 
                 <div class="reel-item">
-                    <div class="reel-media" onclick="openMedia('media/diagetic-dialog.mp4', 'video')">
+                    <div class="reel-media" onclick="openVideo('media/diagetic-dialog.mp4')">
                         <video autoplay loop muted playsinline>
                             <source src="media/diagetic-dialog.mp4" type="video/mp4">
                             Your browser does not support the video tag.
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="reel-item">
-                    <div class="reel-media" onclick="openMedia('media/fake3d.mp4', 'video')">
+                    <div class="reel-media" onclick="openVideo('media/fake3d.mp4')">
                         <video autoplay loop muted playsinline>
                             <source src="media/fake3d.mp4" type="video/mp4">
                             Your browser does not support the video tag.
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="reel-item">
-                    <div class="reel-media" onclick="openMedia('media/lttp.mp4', 'video')">
+                    <div class="reel-media" onclick="openVideo('media/lttp.mp4')">
                         <video autoplay loop muted playsinline>
                             <source src="media/lttp.mp4" type="video/mp4">
                             Your browser does not support the video tag.
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="reel-item">
-                    <div class="reel-media" onclick="openMedia('media/menu.mp4', 'video')">
+                    <div class="reel-media" onclick="openVideo('media/menu.mp4')">
                         <video autoplay loop muted playsinline>
                             <source src="media/menu.mp4" type="video/mp4">
                             Your browser does not support the video tag.
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="reel-media-list">
-                        <div class="reel-media" onclick="openMedia('media/halftone-horizontal.png', 'image')">
+                        <div class="reel-media" onclick="openImage('media/halftone-horizontal.png')">
                             <img src="media/halftone-horizontal.png" alt="Halftone Horizontal"
                                 class="halftone-grid-img">
                         </div>
@@ -121,13 +121,13 @@
                             <p>The effect is extracted into its own function, making it easy to apply to any UI
                                 material.</p>
                         </div>
-                        <div class="reel-media" onclick="openMedia('media/halftone-vertical.png', 'image')">
+                        <div class="reel-media" onclick="openImage('media/halftone-vertical.png')">
                             <img src="media/halftone-vertical.png" alt="Halftone Vertical" class="halftone-grid-img">
                         </div>
                         <div class="reel-content">
                             <p>Any SDF can be passed in to create custom patterns (Square in this case).</p>
                         </div>
-                        <div class="reel-media" onclick="openMedia('media/halftone-animated.gif', 'image')">
+                        <div class="reel-media" onclick="openImage('media/halftone-animated.gif')">
                             <img src="media/halftone-animated.gif" alt="Animated Halftone Effect"
                                 class="halftone-grid-img">
                         </div>
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <div class="reel-item">
-                    <div class="reel-media" style="--expand-text: 'Go to Figma';"
+                    <div class="reel-media" style="--expand-text: 'Go to Figma →';"
                         onclick="window.open('https://www.figma.com/proto/G97ie5AayIYdaGAeTGRQNx/Inventory?node-id=0-1&t=geGz4Ovt31nfFkEE-1', '_blank')">
                         <img src="media/inventory-figma-prototype.png" alt="Inventory Figma Prototype">
                     </div>
@@ -169,12 +169,16 @@
         const modal = document.getElementById('media-modal');
         const target = document.getElementById('modal-target');
 
-        function openMedia(src, type) {
-            target.innerHTML = type === 'video'
-                ? `<video src="${src}" autoplay loop muted controls style="pointer-events: auto;"></video>`
-                : `<img src="${src}" style="pointer-events: auto;">`;
+        function openImage(src) {
+            target.innerHTML = `<img src="${src}" style="pointer-events: auto;">`;
             modal.showModal();
         }
+
+        function openVideo(src) {
+            target.innerHTML = `<video src="${src}" autoplay loop muted controls style="pointer-events: auto;"></video>`;
+            modal.showModal();
+        }
+
 
         modal.addEventListener('close', () => { target.innerHTML = ''; });
     </script>

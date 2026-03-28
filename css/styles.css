@@ -589,7 +589,7 @@ p {
 
         /* Click to expand hint */
         &::after {
-            content: '⛶ ' var(--expand-text, 'Open');
+            content: var(--expand-text, '⛶  Open');
             position: absolute;
             bottom: 1.5rem;
             left: 50%;
@@ -680,7 +680,6 @@ p {
     }
 }
 
-/* --- List View Specific Styles --- */
 .halftone-header {
     padding: 2.5rem 2.5rem 0 2.5rem;
 }
