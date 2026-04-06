@@ -1,344 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-.app { max-width: 420px; margin: 0 auto; padding: 0 0 2rem; font-family: var(--font-sans); }
-.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
-.metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
-.metric-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem; text-align: center; }
-.metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
-.metric-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.metric-unit { font-size: 11px; color: var(--color-text-secondary); }
-.room-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; cursor: pointer; transition: border-color 0.15s; }
-.room-card:hover { border-color: var(--color-border-secondary); }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-.badge { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
-.badge-healthy { background: #EAF3DE; color: #3B6D11; }
-.badge-fair { background: #FAEEDA; color: #854F0B; }
-.dot-healthy { background: #639922; }
-.dot-fair { background: #BA7517; }
-.tab-bar { display: flex; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.25rem; }
-.tab { font-size: 13px; padding: 8px 16px; cursor: pointer; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px; }
-.tab.active { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); font-weight: 500; }
-.back-btn { font-size: 13px; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; gap: 6px; margin-bottom: 1rem; }
-.back-btn:hover { color: var(--color-text-primary); }
-.pill-group { display: flex; gap: 6px; margin-bottom: 1rem; }
-.pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; cursor: pointer; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); background: transparent; }
-.pill.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-secondary); font-weight: 500; }
-.data-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
-.data-row:last-child { border-bottom: none; }
-.export-btn { font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 14px; cursor: pointer; background: transparent; color: var(--color-text-primary); }
-.export-btn:hover { background: var(--color-background-secondary); }
-.section-label { font-size: 12px; color: var(--color-text-secondary); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
-.module-locked { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 14px; }
-.lock-icon { width: 36px; height: 36px; border-radius: var(--border-radius-md); background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.step-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
-.step-row:last-child { border-bottom: none; }
-.step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); flex-shrink: 0; margin-top: 1px; }
-.step-num.done { background: #EAF3DE; border-color: #97C459; color: #3B6D11; }
-.progress-bar { height: 4px; background: var(--color-background-secondary); border-radius: 2px; overflow: hidden; margin: 8px 0; }
-.progress-fill { height: 100%; border-radius: 2px; background: #639922; transition: width 0.4s; }
-.node-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
-.node-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.node-dot-on { background: #639922; }
-.node-dot-off { background: var(--color-border-secondary); }
-.ai-insight-card { background: #EEEDFE; border: 0.5px solid #AFA9EC; border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Home AI Module</title>
+  <style>
+    :root {
+      --background-color-primary: #f8f9fa;
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f8f9fa;
+      --color-text-primary: #212529;
+      --color-text-secondary: #6c757d;
+      --color-border-primary: #dee2e6;
+      --color-border-secondary: #adb5bd;
+      --color-border-tertiary: #e9ecef;
+      --border-radius-lg: 12px;
+      --border-radius-md: 8px;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+    }
 
-<div class="app" id="app">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <div id="screen-dashboard">
-    <div style="padding: 1.25rem 0 0.5rem; display: flex; justify-content: space-between; align-items: flex-start;">
-      <div>
-        <div style="font-size: 13px; color: var(--color-text-secondary);">Sunday morning</div>
-        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-top: 2px;">Aura Home</div>
-      </div>
-      <div style="display: flex; gap: 8px;">
-        <div onclick="showModules()" style="height: 36px; padding: 0 12px; border-radius: 20px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; color: var(--color-text-secondary);">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
-          Modules
+
+    .app {
+      background-color: var(--background-color-primary);
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 0 0 2rem;
+      font-family: var(--font-sans);
+    }
+
+    .card {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 1rem 1.25rem;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .metric-card {
+      background: var(--color-background-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .metric-val {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .metric-unit {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+
+    .room-card {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .room-card:hover {
+      border-color: var(--color-border-secondary);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .badge-healthy {
+      background: #EAF3DE;
+      color: #3B6D11;
+    }
+
+    .badge-fair {
+      background: #FAEEDA;
+      color: #854F0B;
+    }
+
+    .dot-healthy {
+      background: #639922;
+    }
+
+    .dot-fair {
+      background: #BA7517;
+    }
+
+    .tab-bar {
+      display: flex;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      margin-bottom: 1.25rem;
+    }
+
+    .tab {
+      font-size: 13px;
+      padding: 8px 16px;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .tab.active {
+      color: var(--color-text-primary);
+      border-bottom-color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    .back-btn {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .back-btn:hover {
+      color: var(--color-text-primary);
+    }
+
+    .pill-group {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 0.5px solid var(--color-border-tertiary);
+      color: var(--color-text-secondary);
+      background: transparent;
+    }
+
+    .pill.active {
+      background: var(--color-background-secondary);
+      color: var(--color-text-primary);
+      border-color: var(--color-border-secondary);
+      font-weight: 500;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      font-size: 13px;
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .export-btn {
+      font-size: 12px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 6px 14px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--color-text-primary);
+    }
+
+    .export-btn:hover {
+      background: var(--color-background-secondary);
+    }
+
+    .section-label {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .module-locked {
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lock-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-md);
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .step-row:last-child {
+      border-bottom: none;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-num.done {
+      background: #EAF3DE;
+      border-color: #97C459;
+      color: #3B6D11;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--color-background-secondary);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: #639922;
+      transition: width 0.4s;
+    }
+
+    .node-card {
+      background: var(--color-background-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .node-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .node-dot-on {
+      background: #639922;
+    }
+
+    .node-dot-off {
+      background: var(--color-border-secondary);
+    }
+
+    .ai-insight-card {
+      background: #EEEDFE;
+      border: 0.5px solid #AFA9EC;
+      border-radius: var(--border-radius-lg);
+      padding: 1rem 1.25rem;
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <div class="app" id="app">
+
+    <div id="screen-dashboard">
+      <div style="padding: 1.25rem 0 0.5rem; display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div style="font-size: 13px; color: var(--color-text-secondary);">Sunday morning</div>
+          <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-top: 2px;">Aura Home
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div onclick="showModules()"
+            style="height: 36px; padding: 0 12px; border-radius: 20px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; color: var(--color-text-secondary);">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round">
+              <rect x="1" y="1" width="6" height="6" rx="1" />
+              <rect x="9" y="1" width="6" height="6" rx="1" />
+              <rect x="1" y="9" width="6" height="6" rx="1" />
+              <rect x="9" y="9" width="6" height="6" rx="1" />
+            </svg>
+            Modules
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="card" style="margin-bottom: 1rem; text-align: center;">
-      <div style="position: relative; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px;">
-        <svg width="110" height="110" viewBox="0 0 110 110">
-          <circle cx="55" cy="55" r="46" fill="none" stroke="var(--color-border-tertiary)" stroke-width="8"/>
-          <circle cx="55" cy="55" r="46" fill="none" stroke="#639922" stroke-width="8" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="23" transform="rotate(-90 55 55)"/>
-        </svg>
-        <div style="position: absolute; text-align: center;">
-          <div style="font-size: 28px; font-weight: 500; color: var(--color-text-primary); line-height: 1;">92</div>
-          <div style="font-size: 11px; color: var(--color-text-secondary);">/ 100</div>
+      <div class="card" style="margin-bottom: 1rem; text-align: center;">
+        <div
+          style="position: relative; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+          <svg width="110" height="110" viewBox="0 0 110 110">
+            <circle cx="55" cy="55" r="46" fill="none" stroke="var(--color-border-tertiary)" stroke-width="8" />
+            <circle cx="55" cy="55" r="46" fill="none" stroke="#639922" stroke-width="8" stroke-linecap="round"
+              stroke-dasharray="289" stroke-dashoffset="23" transform="rotate(-90 55 55)" />
+          </svg>
+          <div style="position: absolute; text-align: center;">
+            <div style="font-size: 28px; font-weight: 500; color: var(--color-text-primary); line-height: 1;">92</div>
+            <div style="font-size: 11px; color: var(--color-text-secondary);">/ 100</div>
+          </div>
+        </div>
+        <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary);">Home health score</div>
+        <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 4px;">Your home is in great shape
+        </div>
+        <div style="margin-top: 10px;"><span class="badge badge-healthy">Healthy</span></div>
+      </div>
+
+      <div id="ai-banner-locked" class="module-locked" onclick="showModules()" style="cursor: pointer;">
+        <div class="lock-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--color-text-secondary)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="10" height="8" rx="1.5" />
+            <path d="M5 7V5a3 3 0 0 1 6 0v2" />
+          </svg>
+        </div>
+        <div style="flex: 1;">
+          <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">AI
+            insights not active</div>
+          <div style="font-size: 12px; color: var(--color-text-secondary);">Download the AI module to enable local
+            intelligence →</div>
         </div>
       </div>
-      <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary);">Home health score</div>
-      <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 4px;">Your home is in great shape</div>
-      <div style="margin-top: 10px;"><span class="badge badge-healthy">Healthy</span></div>
-    </div>
 
-    <div id="ai-banner-locked" class="module-locked" onclick="showModules()" style="cursor: pointer;">
-      <div class="lock-icon">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="10" height="8" rx="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg>
-      </div>
-      <div style="flex: 1;">
-        <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">AI insights not active</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Download the AI module to enable local intelligence →</div>
-      </div>
-    </div>
-
-    <div id="ai-banner-active" style="display: none; margin-bottom: 1rem;">
-      <div class="ai-insight-card" onclick="showAI()" style="cursor: pointer;">
-        <div style="font-size: 11px; font-weight: 500; color: #3C3489; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="#534AB7" stroke-width="1"/><path d="M6 3.5v3l2 1" stroke="#534AB7" stroke-width="1" stroke-linecap="round"/></svg>
-          AI insight · running locally
+      <div id="ai-banner-active" style="display: none; margin-bottom: 1rem;">
+        <div class="ai-insight-card" onclick="showAI()" style="cursor: pointer;">
+          <div
+            style="font-size: 11px; font-weight: 500; color: #3C3489; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="5.5" stroke="#534AB7" stroke-width="1" />
+              <path d="M6 3.5v3l2 1" stroke="#534AB7" stroke-width="1" stroke-linecap="round" />
+            </svg>
+            AI insight · running locally
+          </div>
+          <div style="font-size: 13px; color: #26215C; line-height: 1.5;">Kitchen humidity elevated for 3h. Consider
+            ventilation after cooking.</div>
+          <div style="font-size: 12px; color: #534AB7; margin-top: 8px;">View all insights →</div>
         </div>
-        <div style="font-size: 13px; color: #26215C; line-height: 1.5;">Kitchen humidity elevated for 3h. Consider ventilation after cooking.</div>
-        <div style="font-size: 12px; color: #534AB7; margin-top: 8px;">View all insights →</div>
       </div>
+
+      <div style="margin-bottom: 10px;">
+        <div class="section-label">Rooms</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;" id="room-list"></div>
     </div>
 
-    <div style="margin-bottom: 10px;"><div class="section-label">Rooms</div></div>
-    <div style="display: flex; flex-direction: column; gap: 10px;" id="room-list"></div>
-  </div>
+    <div id="screen-modules" style="display: none;">
+      <div style="padding: 1.25rem 0 0;">
+        <div class="back-btn" onclick="showDashboard()">← Back</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">Modules
+        </div>
+        <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem;">Optional features that
+          run entirely on your local network.</div>
 
-  <div id="screen-modules" style="display: none;">
-    <div style="padding: 1.25rem 0 0;">
-      <div class="back-btn" onclick="showDashboard()">← Back</div>
-      <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">Modules</div>
-      <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem;">Optional features that run entirely on your local network.</div>
+        <div class="card" style="margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div
+                style="width: 40px; height: 40px; border-radius: var(--border-radius-md); background: #EEEDFE; border: 0.5px solid #AFA9EC; display: flex; align-items: center; justify-content: center;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#534AB7" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="9" r="3" />
+                  <path
+                    d="M9 2v2M9 14v2M2 9h2M14 9h2M4.2 4.2l1.4 1.4M12.4 12.4l1.4 1.4M4.2 13.8l1.4-1.4M12.4 5.6l1.4-1.4" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">AI insight engine
+                </div>
+                <div style="font-size: 12px; color: var(--color-text-secondary);">Anomaly detection · predictive tips
+                </div>
+              </div>
+            </div>
+            <span id="ai-module-badge"
+              style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--color-background-secondary); color: var(--color-text-secondary); font-weight: 500;">Not
+              installed</span>
+          </div>
+          <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 12px;">Runs
+            a
+            lightweight inference model on a local device (Raspberry Pi or similar). No data leaves your home.</div>
+          <div
+            style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; margin-bottom: 12px; font-size: 12px; color: var(--color-text-secondary);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Model size</span><span
+                style="color: var(--color-text-primary); font-weight: 500;">~180 MB</span></div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Min
+                hardware</span><span style="color: var(--color-text-primary); font-weight: 500;">Raspberry Pi 4 (2
+                GB)</span></div>
+            <div style="display: flex; justify-content: space-between;"><span>Runs on</span><span
+                style="color: var(--color-text-primary); font-weight: 500;">Local network only</span></div>
+          </div>
+          <button id="ai-install-btn" onclick="startInstall()"
+            style="width: 100%; font-size: 13px; font-weight: 500; border: none; border-radius: var(--border-radius-md); padding: 10px; cursor: pointer; background: var(--color-text-primary); color: var(--color-background-primary);">Download
+            &amp; install</button>
+          <div id="ai-install-progress" style="display: none; margin-top: 12px;">
+            <div
+              style="display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">
+              <span id="progress-label">Downloading…</span>
+              <span id="progress-pct">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
 
-      <div class="card" style="margin-bottom: 1rem;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 40px; height: 40px; border-radius: var(--border-radius-md); background: #EEEDFE; border: 0.5px solid #AFA9EC; display: flex; align-items: center; justify-content: center;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><path d="M9 2v2M9 14v2M2 9h2M14 9h2M4.2 4.2l1.4 1.4M12.4 12.4l1.4 1.4M4.2 13.8l1.4-1.4M12.4 5.6l1.4-1.4"/></svg>
+        <div class="card" style="margin-bottom: 1rem; opacity: 0.6;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div
+              style="width: 40px; height: 40px; border-radius: var(--border-radius-md); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center;">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="var(--color-text-secondary)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 2L2 7v9h5v-5h4v5h5V7z" />
+              </svg>
             </div>
             <div>
-              <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">AI insight engine</div>
-              <div style="font-size: 12px; color: var(--color-text-secondary);">Anomaly detection · predictive tips</div>
+              <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Home automation bridge
+              </div>
+              <div style="font-size: 12px; color: var(--color-text-secondary);">HomeKit · Home Assistant · Matter</div>
             </div>
           </div>
-          <span id="ai-module-badge" style="font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--color-background-secondary); color: var(--color-text-secondary); font-weight: 500;">Not installed</span>
+          <div style="font-size: 12px; color: var(--color-text-secondary);">Connect Aura sensors to your existing smart
+            home platform.</div>
+          <div
+            style="margin-top: 10px; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); display: inline-block; padding: 3px 9px; border-radius: 20px;">
+            Coming soon</div>
         </div>
-        <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 12px;">Runs a lightweight inference model on a local device (Raspberry Pi or similar). No data leaves your home.</div>
-        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; margin-bottom: 12px; font-size: 12px; color: var(--color-text-secondary);">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Model size</span><span style="color: var(--color-text-primary); font-weight: 500;">~180 MB</span></div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Min hardware</span><span style="color: var(--color-text-primary); font-weight: 500;">Raspberry Pi 4 (2 GB)</span></div>
-          <div style="display: flex; justify-content: space-between;"><span>Runs on</span><span style="color: var(--color-text-primary); font-weight: 500;">Local network only</span></div>
-        </div>
-        <button id="ai-install-btn" onclick="startInstall()" style="width: 100%; font-size: 13px; font-weight: 500; border: none; border-radius: var(--border-radius-md); padding: 10px; cursor: pointer; background: var(--color-text-primary); color: var(--color-background-primary);">Download &amp; install</button>
-        <div id="ai-install-progress" style="display: none; margin-top: 12px;">
-          <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">
-            <span id="progress-label">Downloading…</span>
-            <span id="progress-pct">0%</span>
-          </div>
-          <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%;"></div></div>
-        </div>
-      </div>
 
-      <div class="card" style="margin-bottom: 1rem; opacity: 0.6;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-          <div style="width: 40px; height: 40px; border-radius: var(--border-radius-md); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center;">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L2 7v9h5v-5h4v5h5V7z"/></svg>
+        <div class="card" style="opacity: 0.6;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div
+              style="width: 40px; height: 40px; border-radius: var(--border-radius-md); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center;">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="var(--color-text-secondary)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 8H3M3 8l4-4M3 8l4 4" />
+              </svg>
+            </div>
+            <div>
+              <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Data export sync</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary);">Auto-export to NAS · Google Sheets</div>
+            </div>
           </div>
-          <div>
-            <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Home automation bridge</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary);">HomeKit · Home Assistant · Matter</div>
-          </div>
-        </div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Connect Aura sensors to your existing smart home platform.</div>
-        <div style="margin-top: 10px; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); display: inline-block; padding: 3px 9px; border-radius: 20px;">Coming soon</div>
-      </div>
-
-      <div class="card" style="opacity: 0.6;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-          <div style="width: 40px; height: 40px; border-radius: var(--border-radius-md); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center;">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8H3M3 8l4-4M3 8l4 4"/></svg>
-          </div>
-          <div>
-            <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Data export sync</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary);">Auto-export to NAS · Google Sheets</div>
-          </div>
-        </div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Schedule automated CSV exports to a destination of your choice.</div>
-        <div style="margin-top: 10px; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); display: inline-block; padding: 3px 9px; border-radius: 20px;">Coming soon</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="screen-setup-node" style="display: none;">
-    <div style="padding: 1.25rem 0 0;">
-      <div class="back-btn" onclick="showModules()">← Modules</div>
-      <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">Set up inference node</div>
-      <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem;">Your Raspberry Pi will run AI analysis locally — no cloud required.</div>
-
-      <div class="card" style="margin-bottom: 1rem;">
-        <div class="step-row">
-          <div class="step-num done">1</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Module downloaded</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary);">aura-ai-module-v1.2.img (180 MB)</div>
-          </div>
-        </div>
-        <div class="step-row">
-          <div class="step-num" id="step2-num">2</div>
-          <div style="flex: 1;">
-            <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Flash to SD card</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 8px;">Use Raspberry Pi Imager to write the image, then insert into your Pi 4.</div>
-            <button onclick="markStep2()" style="font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 14px; cursor: pointer; background: transparent; color: var(--color-text-primary);">Mark as done</button>
-          </div>
-        </div>
-        <div class="step-row">
-          <div class="step-num" id="step3-num">3</div>
-          <div style="flex: 1;">
-            <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Connect Pi to your network</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 8px;">Power on the Pi. Aura will detect it automatically on your local network.</div>
-            <button onclick="startDiscover()" id="discover-btn" style="font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 14px; cursor: pointer; background: transparent; color: var(--color-text-primary);">Scan network</button>
-          </div>
-        </div>
-        <div class="step-row">
-          <div class="step-num" id="step4-num">4</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Confirm &amp; activate</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary);">Approve the node and AI insights will begin.</div>
-          </div>
-        </div>
-      </div>
-
-      <div id="node-found-card" style="display: none;" class="card" style="margin-bottom: 1rem;">
-        <div style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;">Node discovered</div>
-        <div class="node-card" style="margin-bottom: 10px;">
-          <div class="node-dot node-dot-on"></div>
-          <div style="flex: 1;">
-            <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">aura-node-local</div>
-            <div style="font-size: 11px; color: var(--color-text-secondary); font-family: var(--font-mono);">192.168.1.42 · Raspberry Pi 4</div>
-          </div>
-          <div style="font-size: 11px; color: #3B6D11; background: #EAF3DE; padding: 3px 8px; border-radius: 20px;">Reachable</div>
-        </div>
-        <button onclick="activateNode()" style="width: 100%; font-size: 13px; font-weight: 500; border: none; border-radius: var(--border-radius-md); padding: 10px; cursor: pointer; background: var(--color-text-primary); color: var(--color-background-primary);">Activate AI module</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="screen-ai" style="display: none;">
-    <div style="padding: 1.25rem 0 0;">
-      <div class="back-btn" onclick="showDashboard()">← Back</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary);">AI insights</div>
-        <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: #3B6D11;">
-          <div class="node-dot node-dot-on"></div>
-          Local node active
-        </div>
-      </div>
-      <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.25rem;">Analysis runs on your Raspberry Pi. No data leaves your network.</div>
-      <div class="ai-insight-card" style="margin-bottom: 10px;">
-        <div style="font-size: 11px; font-weight: 500; color: #854F0B; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 8px;">Kitchen · Humidity</div>
-        <div style="font-size: 14px; color: #26215C; line-height: 1.5; margin-bottom: 8px;">Humidity elevated at 62% for 3 hours. Ventilation or range hood recommended to bring below 55%.</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Detected 3h ago · 62%RH avg</div>
-      </div>
-      <div class="ai-insight-card" style="margin-bottom: 10px;">
-        <div style="font-size: 11px; font-weight: 500; color: #3B6D11; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 8px;">Master Bedroom · Air quality</div>
-        <div style="font-size: 14px; color: #26215C; line-height: 1.5; margin-bottom: 8px;">AQI consistently below 15 all week — ideal for restful sleep.</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">7-day trend · AQI avg 12</div>
-      </div>
-      <div class="card" style="margin-top: 1rem;">
-        <div style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em;">Node status</div>
-        <div class="data-row">
-          <span style="color: var(--color-text-secondary);">Device</span>
-          <span style="font-weight: 500;">Raspberry Pi 4</span>
-        </div>
-        <div class="data-row">
-          <span style="color: var(--color-text-secondary);">Address</span>
-          <span style="font-family: var(--font-mono); font-size: 12px;">192.168.1.42</span>
-        </div>
-        <div class="data-row">
-          <span style="color: var(--color-text-secondary);">Model version</span>
-          <span>v1.2.0</span>
-        </div>
-        <div class="data-row">
-          <span style="color: var(--color-text-secondary);">Last inference</span>
-          <span>2 min ago</span>
-        </div>
-        <div class="data-row">
-          <span style="color: var(--color-text-secondary);">Data sent externally</span>
-          <span style="color: #3B6D11; font-weight: 500;">None</span>
+          <div style="font-size: 12px; color: var(--color-text-secondary);">Schedule automated CSV exports to a
+            destination of your choice.</div>
+          <div
+            style="margin-top: 10px; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); display: inline-block; padding: 3px 9px; border-radius: 20px;">
+            Coming soon</div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="screen-room" style="display: none;">
-    <div style="padding: 1.25rem 0 0;">
-      <div class="back-btn" onclick="showDashboard()">← Back</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <div>
-          <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary);" id="room-title">Room</div>
-          <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 2px;" id="room-subtitle">Sensor</div>
+    <div id="screen-setup-node" style="display: none;">
+      <div style="padding: 1.25rem 0 0;">
+        <div class="back-btn" onclick="showModules()">← Modules</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">Set up
+          inference node</div>
+        <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem;">Your Raspberry Pi will
+          run AI analysis locally — no cloud required.</div>
+
+        <div class="card" style="margin-bottom: 1rem;">
+          <div class="step-row">
+            <div class="step-num done">1</div>
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">
+                Module
+                downloaded</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary);">aura-ai-module-v1.2.img (180 MB)</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num" id="step2-num">2</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">
+                Flash
+                to SD card</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 8px;">Use Raspberry Pi
+                Imager to write the image, then insert into your Pi 4.</div>
+              <button onclick="markStep2()"
+                style="font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 14px; cursor: pointer; background: transparent; color: var(--color-text-primary);">Mark
+                as done</button>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num" id="step3-num">3</div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">
+                Connect Pi to your network</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 8px;">Power on the Pi.
+                Aura
+                will detect it automatically on your local network.</div>
+              <button onclick="startDiscover()" id="discover-btn"
+                style="font-size: 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 14px; cursor: pointer; background: transparent; color: var(--color-text-primary);">Scan
+                network</button>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num" id="step4-num">4</div>
+            <div>
+              <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">
+                Confirm &amp; activate</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary);">Approve the node and AI insights will
+                begin.</div>
+            </div>
+          </div>
         </div>
-        <span class="badge" id="room-badge">Healthy</span>
-      </div>
-      <div class="tab-bar">
-        <div class="tab active" onclick="switchTab(this,'tab-overview')">Overview</div>
-        <div class="tab" onclick="switchTab(this,'tab-raw')">Raw data</div>
-      </div>
-      <div id="tab-overview">
-        <div class="metric-grid" style="margin-bottom: 1rem;">
-          <div class="metric-card"><div class="metric-label">Temp</div><div class="metric-val" id="rv-temp">—</div><div class="metric-unit">°C</div></div>
-          <div class="metric-card"><div class="metric-label">Humidity</div><div class="metric-val" id="rv-hum">—</div><div class="metric-unit">%RH</div></div>
-          <div class="metric-card"><div class="metric-label">AQI</div><div class="metric-val" id="rv-aqi">—</div><div class="metric-unit">AQI</div></div>
-        </div>
-        <div class="card">
-          <div class="data-row"><span style="color: var(--color-text-secondary);">Battery</span><span id="rv-battery" style="font-weight: 500;">—</span></div>
-          <div class="data-row"><span style="color: var(--color-text-secondary);">Signal</span><span id="rv-signal" style="font-weight: 500;">—</span></div>
-          <div class="data-row"><span style="color: var(--color-text-secondary);">ID</span><span id="rv-id" style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary);">—</span></div>
-        </div>
-      </div>
-      <div id="tab-raw" style="display: none;">
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;"><button class="export-btn" onclick="exportCSV()">Export CSV</button></div>
-        <div class="card" style="overflow: auto;">
-          <table style="width: 100%; font-size: 12px; border-collapse: collapse; table-layout: fixed;">
-            <thead><tr style="border-bottom: 0.5px solid var(--color-border-tertiary);">
-              <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Time</td>
-              <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Type</td>
-              <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Value</td>
-              <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Unit</td>
-            </tr></thead>
-            <tbody id="raw-table-body"></tbody>
-          </table>
+
+        <div id="node-found-card" style="display: none;" class="card" style="margin-bottom: 1rem;">
+          <div
+            style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px;">
+            Node discovered</div>
+          <div class="node-card" style="margin-bottom: 10px;">
+            <div class="node-dot node-dot-on"></div>
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">aura-node-local</div>
+              <div style="font-size: 11px; color: var(--color-text-secondary); font-family: var(--font-mono);">
+                192.168.1.42 · Raspberry Pi 4</div>
+            </div>
+            <div style="font-size: 11px; color: #3B6D11; background: #EAF3DE; padding: 3px 8px; border-radius: 20px;">
+              Reachable</div>
+          </div>
+          <button onclick="activateNode()"
+            style="width: 100%; font-size: 13px; font-weight: 500; border: none; border-radius: var(--border-radius-md); padding: 10px; cursor: pointer; background: var(--color-text-primary); color: var(--color-background-primary);">Activate
+            AI module</button>
         </div>
       </div>
     </div>
+
+    <div id="screen-ai" style="display: none;">
+      <div style="padding: 1.25rem 0 0;">
+        <div class="back-btn" onclick="showDashboard()">← Back</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary);">AI insights</div>
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: #3B6D11;">
+            <div class="node-dot node-dot-on"></div>
+            Local node active
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.25rem;">Analysis runs on your
+          Raspberry Pi. No data leaves your network.</div>
+        <div class="ai-insight-card" style="margin-bottom: 10px;">
+          <div
+            style="font-size: 11px; font-weight: 500; color: #854F0B; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 8px;">
+            Kitchen · Humidity</div>
+          <div style="font-size: 14px; color: #26215C; line-height: 1.5; margin-bottom: 8px;">Humidity elevated at 62%
+            for
+            3 hours. Ventilation or range hood recommended to bring below 55%.</div>
+          <div style="font-size: 12px; color: var(--color-text-secondary);">Detected 3h ago · 62%RH avg</div>
+        </div>
+        <div class="ai-insight-card" style="margin-bottom: 10px;">
+          <div
+            style="font-size: 11px; font-weight: 500; color: #3B6D11; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 8px;">
+            Master Bedroom · Air quality</div>
+          <div style="font-size: 14px; color: #26215C; line-height: 1.5; margin-bottom: 8px;">AQI consistently below 15
+            all week — ideal for restful sleep.</div>
+          <div style="font-size: 12px; color: var(--color-text-secondary);">7-day trend · AQI avg 12</div>
+        </div>
+        <div class="card" style="margin-top: 1rem;">
+          <div
+            style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em;">
+            Node status</div>
+          <div class="data-row">
+            <span style="color: var(--color-text-secondary);">Device</span>
+            <span style="font-weight: 500;">Raspberry Pi 4</span>
+          </div>
+          <div class="data-row">
+            <span style="color: var(--color-text-secondary);">Address</span>
+            <span style="font-family: var(--font-mono); font-size: 12px;">192.168.1.42</span>
+          </div>
+          <div class="data-row">
+            <span style="color: var(--color-text-secondary);">Model version</span>
+            <span>v1.2.0</span>
+          </div>
+          <div class="data-row">
+            <span style="color: var(--color-text-secondary);">Last inference</span>
+            <span>2 min ago</span>
+          </div>
+          <div class="data-row">
+            <span style="color: var(--color-text-secondary);">Data sent externally</span>
+            <span style="color: #3B6D11; font-weight: 500;">None</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-room" style="display: none;">
+      <div style="padding: 1.25rem 0 0;">
+        <div class="back-btn" onclick="showDashboard()">← Back</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div>
+            <div style="font-size: 20px; font-weight: 500; color: var(--color-text-primary);" id="room-title">Room</div>
+            <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 2px;" id="room-subtitle">Sensor
+            </div>
+          </div>
+          <span class="badge" id="room-badge">Healthy</span>
+        </div>
+        <div class="tab-bar">
+          <div class="tab active" onclick="switchTab(this,'tab-overview')">Overview</div>
+          <div class="tab" onclick="switchTab(this,'tab-raw')">Raw data</div>
+        </div>
+        <div id="tab-overview">
+          <div class="metric-grid" style="margin-bottom: 1rem;">
+            <div class="metric-card">
+              <div class="metric-label">Temp</div>
+              <div class="metric-val" id="rv-temp">—</div>
+              <div class="metric-unit">°C</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Humidity</div>
+              <div class="metric-val" id="rv-hum">—</div>
+              <div class="metric-unit">%RH</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">AQI</div>
+              <div class="metric-val" id="rv-aqi">—</div>
+              <div class="metric-unit">AQI</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="data-row"><span style="color: var(--color-text-secondary);">Battery</span><span id="rv-battery"
+                style="font-weight: 500;">—</span></div>
+            <div class="data-row"><span style="color: var(--color-text-secondary);">Signal</span><span id="rv-signal"
+                style="font-weight: 500;">—</span></div>
+            <div class="data-row"><span style="color: var(--color-text-secondary);">ID</span><span id="rv-id"
+                style="font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary);">—</span>
+            </div>
+          </div>
+        </div>
+        <div id="tab-raw" style="display: none;">
+          <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;"><button class="export-btn"
+              onclick="exportCSV()">Export CSV</button></div>
+          <div class="card" style="overflow: auto;">
+            <table style="width: 100%; font-size: 12px; border-collapse: collapse; table-layout: fixed;">
+              <thead>
+                <tr style="border-bottom: 0.5px solid var(--color-border-tertiary);">
+                  <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Time</td>
+                  <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Type</td>
+                  <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Value</td>
+                  <td style="padding: 6px 4px; color: var(--color-text-secondary); font-weight: 500;">Unit</td>
+                </tr>
+              </thead>
+              <tbody id="raw-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-</div>
+  <script>
+    const state = {
+      aiModuleInstalled: false,
+      sensors: [
+        { id: "sn-001", room: "Master Bedroom", status: "Healthy", data: { temp: 21.5, humidity: 45, aqi: 12 }, battery: 88, signal: -65 },
+        { id: "sn-002", room: "Kitchen", status: "Fair", data: { temp: 23.2, humidity: 62, aqi: 48 }, battery: 92, signal: -72 }
+      ]
+    };
+    let currentRoom = null;
 
-<script>
-const state = {
-  aiModuleInstalled: false,
-  sensors: [
-    { id: "sn-001", room: "Master Bedroom", status: "Healthy", data: { temp: 21.5, humidity: 45, aqi: 12 }, battery: 88, signal: -65 },
-    { id: "sn-002", room: "Kitchen", status: "Fair", data: { temp: 23.2, humidity: 62, aqi: 48 }, battery: 92, signal: -72 }
-  ]
-};
-let currentRoom = null;
+    function show(id) {
+      ['screen-dashboard', 'screen-modules', 'screen-setup-node', 'screen-ai', 'screen-room'].forEach(s => {
+        document.getElementById(s).style.display = s === id ? '' : 'none';
+      });
+    }
+    function showDashboard() { show('screen-dashboard'); }
+    function showModules() { show('screen-modules'); }
+    function showAI() { show('screen-ai'); }
 
-function show(id) {
-  ['screen-dashboard','screen-modules','screen-setup-node','screen-ai','screen-room'].forEach(s => {
-    document.getElementById(s).style.display = s === id ? '' : 'none';
-  });
-}
-function showDashboard() { show('screen-dashboard'); }
-function showModules() { show('screen-modules'); }
-function showAI() { show('screen-ai'); }
-
-function renderRooms() {
-  const list = document.getElementById('room-list');
-  list.innerHTML = '';
-  state.sensors.forEach(s => {
-    const sc = s.status === 'Healthy' ? 'healthy' : 'fair';
-    const div = document.createElement('div');
-    div.className = 'room-card';
-    div.innerHTML = `
+    function renderRooms() {
+      const list = document.getElementById('room-list');
+      list.innerHTML = '';
+      state.sensors.forEach(s => {
+        const sc = s.status === 'Healthy' ? 'healthy' : 'fair';
+        const div = document.createElement('div');
+        div.className = 'room-card';
+        div.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
         <div>
           <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">${s.room}</div>
@@ -354,122 +742,125 @@ function renderRooms() {
         <div class="metric-card"><div class="metric-label">Humidity</div><div class="metric-val">${s.data.humidity}</div><div class="metric-unit">%RH</div></div>
         <div class="metric-card"><div class="metric-label">AQI</div><div class="metric-val">${s.data.aqi}</div><div class="metric-unit">AQI</div></div>
       </div>`;
-    div.onclick = () => showRoom(s);
-    list.appendChild(div);
-  });
-}
-
-function showRoom(sensor) {
-  currentRoom = sensor;
-  show('screen-room');
-  document.getElementById('room-title').textContent = sensor.room;
-  document.getElementById('room-subtitle').textContent = `Sensor ${sensor.id}`;
-  const badge = document.getElementById('room-badge');
-  badge.textContent = sensor.status;
-  badge.className = 'badge badge-' + (sensor.status === 'Healthy' ? 'healthy' : 'fair');
-  document.getElementById('rv-temp').textContent = sensor.data.temp;
-  document.getElementById('rv-hum').textContent = sensor.data.humidity;
-  document.getElementById('rv-aqi').textContent = sensor.data.aqi;
-  document.getElementById('rv-battery').textContent = sensor.battery + '%';
-  document.getElementById('rv-signal').textContent = sensor.signal + ' dBm';
-  document.getElementById('rv-id').textContent = sensor.id;
-  switchTab(document.querySelector('.tab'), 'tab-overview');
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===0));
-  buildRawTable(sensor);
-}
-
-function switchTab(el, tabId) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  ['tab-overview','tab-raw'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = id === tabId ? '' : 'none';
-  });
-}
-
-function buildRawTable(sensor) {
-  const tbody = document.getElementById('raw-table-body');
-  tbody.innerHTML = '';
-  const types = [['temp', sensor.data.temp, '°C'], ['humidity', sensor.data.humidity, '%RH'], ['aqi', sensor.data.aqi, 'AQI']];
-  const now = new Date();
-  for (let i = 4; i >= 0; i--) {
-    types.forEach(([type, base, unit]) => {
-      const t = new Date(now - i * 600000);
-      const val = (base + (Math.random()-0.5)*2).toFixed(1);
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td style="padding:6px 4px;color:var(--color-text-secondary);font-size:11px;font-family:var(--font-mono);">${t.toTimeString().slice(0,5)}</td><td style="padding:6px 4px;">${type}</td><td style="padding:6px 4px;font-weight:500;">${val}</td><td style="padding:6px 4px;color:var(--color-text-secondary);">${unit}</td>`;
-      tbody.appendChild(tr);
-    });
-  }
-}
-
-function exportCSV() {
-  const s = currentRoom;
-  const rows = ['timestamp,room_id,sensor_type,value,unit'];
-  const now = new Date();
-  [['temp', s.data.temp, 'C'], ['humidity', s.data.humidity, 'pct'], ['aqi', s.data.aqi, 'AQI']].forEach(([type, base, unit]) => {
-    for (let i = 0; i < 24; i++) {
-      const t = new Date(now - i * 3600000).toISOString();
-      const val = (base + (Math.random()-0.5)*2).toFixed(1);
-      rows.push(`${t},${s.id},${type},${val},${unit}`);
+        div.onclick = () => showRoom(s);
+        list.appendChild(div);
+      });
     }
-  });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([rows.join('\n')], {type:'text/csv'}));
-  a.download = `aura_${s.id}_export.csv`;
-  a.click();
-}
 
-let installTimer = null;
-function startInstall() {
-  document.getElementById('ai-install-btn').style.display = 'none';
-  document.getElementById('ai-install-progress').style.display = '';
-  let pct = 0;
-  const stages = [[40,'Downloading…'],[70,'Verifying…'],[100,'Complete']];
-  installTimer = setInterval(() => {
-    pct = Math.min(pct + 3, 100);
-    document.getElementById('progress-fill').style.width = pct + '%';
-    document.getElementById('progress-pct').textContent = pct + '%';
-    const stage = stages.find(s => pct <= s[0]);
-    if (stage) document.getElementById('progress-label').textContent = stage[1];
-    if (pct >= 100) {
-      clearInterval(installTimer);
+    function showRoom(sensor) {
+      currentRoom = sensor;
+      show('screen-room');
+      document.getElementById('room-title').textContent = sensor.room;
+      document.getElementById('room-subtitle').textContent = `Sensor ${sensor.id}`;
+      const badge = document.getElementById('room-badge');
+      badge.textContent = sensor.status;
+      badge.className = 'badge badge-' + (sensor.status === 'Healthy' ? 'healthy' : 'fair');
+      document.getElementById('rv-temp').textContent = sensor.data.temp;
+      document.getElementById('rv-hum').textContent = sensor.data.humidity;
+      document.getElementById('rv-aqi').textContent = sensor.data.aqi;
+      document.getElementById('rv-battery').textContent = sensor.battery + '%';
+      document.getElementById('rv-signal').textContent = sensor.signal + ' dBm';
+      document.getElementById('rv-id').textContent = sensor.id;
+      switchTab(document.querySelector('.tab'), 'tab-overview');
+      document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+      buildRawTable(sensor);
+    }
+
+    function switchTab(el, tabId) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      ['tab-overview', 'tab-raw'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = id === tabId ? '' : 'none';
+      });
+    }
+
+    function buildRawTable(sensor) {
+      const tbody = document.getElementById('raw-table-body');
+      tbody.innerHTML = '';
+      const types = [['temp', sensor.data.temp, '°C'], ['humidity', sensor.data.humidity, '%RH'], ['aqi', sensor.data.aqi, 'AQI']];
+      const now = new Date();
+      for (let i = 4; i >= 0; i--) {
+        types.forEach(([type, base, unit]) => {
+          const t = new Date(now - i * 600000);
+          const val = (base + (Math.random() - 0.5) * 2).toFixed(1);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td style="padding:6px 4px;color:var(--color-text-secondary);font-size:11px;font-family:var(--font-mono);">${t.toTimeString().slice(0, 5)}</td><td style="padding:6px 4px;">${type}</td><td style="padding:6px 4px;font-weight:500;">${val}</td><td style="padding:6px 4px;color:var(--color-text-secondary);">${unit}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function exportCSV() {
+      const s = currentRoom;
+      const rows = ['timestamp,room_id,sensor_type,value,unit'];
+      const now = new Date();
+      [['temp', s.data.temp, 'C'], ['humidity', s.data.humidity, 'pct'], ['aqi', s.data.aqi, 'AQI']].forEach(([type, base, unit]) => {
+        for (let i = 0; i < 24; i++) {
+          const t = new Date(now - i * 3600000).toISOString();
+          const val = (base + (Math.random() - 0.5) * 2).toFixed(1);
+          rows.push(`${t},${s.id},${type},${val},${unit}`);
+        }
+      });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' }));
+      a.download = `aura_${s.id}_export.csv`;
+      a.click();
+    }
+
+    let installTimer = null;
+    function startInstall() {
+      document.getElementById('ai-install-btn').style.display = 'none';
+      document.getElementById('ai-install-progress').style.display = '';
+      let pct = 0;
+      const stages = [[40, 'Downloading…'], [70, 'Verifying…'], [100, 'Complete']];
+      installTimer = setInterval(() => {
+        pct = Math.min(pct + 3, 100);
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-pct').textContent = pct + '%';
+        const stage = stages.find(s => pct <= s[0]);
+        if (stage) document.getElementById('progress-label').textContent = stage[1];
+        if (pct >= 100) {
+          clearInterval(installTimer);
+          setTimeout(() => {
+            document.getElementById('ai-install-progress').style.display = 'none';
+            document.getElementById('ai-module-badge').textContent = 'Downloaded';
+            document.getElementById('ai-module-badge').style.background = '#EAF3DE';
+            document.getElementById('ai-module-badge').style.color = '#3B6D11';
+            document.getElementById('ai-install-btn').textContent = 'Set up inference node →';
+            document.getElementById('ai-install-btn').style.display = '';
+            document.getElementById('ai-install-btn').onclick = () => show('screen-setup-node');
+          }, 400);
+        }
+      }, 60);
+    }
+
+    function markStep2() {
+      document.getElementById('step2-num').classList.add('done');
+      document.getElementById('step2-num').textContent = '2';
+    }
+
+    function startDiscover() {
+      const btn = document.getElementById('discover-btn');
+      btn.textContent = 'Scanning…';
+      btn.disabled = true;
       setTimeout(() => {
-        document.getElementById('ai-install-progress').style.display = 'none';
-        document.getElementById('ai-module-badge').textContent = 'Downloaded';
-        document.getElementById('ai-module-badge').style.background = '#EAF3DE';
-        document.getElementById('ai-module-badge').style.color = '#3B6D11';
-        document.getElementById('ai-install-btn').textContent = 'Set up inference node →';
-        document.getElementById('ai-install-btn').style.display = '';
-        document.getElementById('ai-install-btn').onclick = () => show('screen-setup-node');
-      }, 400);
+        document.getElementById('step3-num').classList.add('done');
+        document.getElementById('node-found-card').style.display = '';
+        btn.textContent = 'Found';
+      }, 1800);
     }
-  }, 60);
-}
 
-function markStep2() {
-  document.getElementById('step2-num').classList.add('done');
-  document.getElementById('step2-num').textContent = '2';
-}
+    function activateNode() {
+      state.aiModuleInstalled = true;
+      document.getElementById('step4-num').classList.add('done');
+      document.getElementById('ai-banner-locked').style.display = 'none';
+      document.getElementById('ai-banner-active').style.display = '';
+      setTimeout(() => showDashboard(), 600);
+    }
 
-function startDiscover() {
-  const btn = document.getElementById('discover-btn');
-  btn.textContent = 'Scanning…';
-  btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('step3-num').classList.add('done');
-    document.getElementById('node-found-card').style.display = '';
-    btn.textContent = 'Found';
-  }, 1800);
-}
+    renderRooms();
+  </script>
+  </body>
 
-function activateNode() {
-  state.aiModuleInstalled = true;
-  document.getElementById('step4-num').classList.add('done');
-  document.getElementById('ai-banner-locked').style.display = 'none';
-  document.getElementById('ai-banner-active').style.display = '';
-  setTimeout(() => showDashboard(), 600);
-}
-
-renderRooms();
-</script>
+</html>
