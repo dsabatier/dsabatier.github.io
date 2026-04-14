@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modals</title>
+
+    <link rel="stylesheet" href="../../css/defaults.css">
+    <style>
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            padding: var(--padding-lg);
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--color-blue);
+            color: white;
+            border: none;
+            padding: var(--padding-md);
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-md);
+            cursor: pointer;
+            margin: var(--margin-md);
+        }
+
+        button:hover {
+            background-color: #0040cc;
+        }
+
+        dialog {
+            border: none;
+            border-radius: var(--border-radius-md);
+            padding: var(--padding-lg);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .dialog-content h2 {
+            margin-top: 0;
+            color: var(--color-pink);
+        }
+
+        .dialog-content p {
+            margin-bottom: var(--margin-lg);
+        }
+
+        .close-btn {
+            background-color: var(--color-pink);
+        }
+
+        .close-btn:hover {
+            background-color: #cc0055;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dialog</h1>
+    <p>Click the button below to open a dialog using native browser features.</p>
+
+    <button id="openDialogBtn">Open Dialog</button>
+
+    <dialog id="demoDialog">
+        <div class="dialog-content">
+            <h2>Welcome to the Dialog!</h2>
+            <p>This dialog is created using the native HTML &lt;dialog&gt; element and JavaScript. No external libraries
+                required!</p>
+            <p>The backdrop and dialog behavior are handled natively by the browser.</p>
+            <p>The dialog element has built-in accessibility features like focus-trapping. Try navigating with keyboard
+                with the dialog open or closed.</p>
+            <button class="close-btn" id="closeDialogBtn">Close Dialog</button>
+        </div>
+    </dialog>
+
+    <script>
+        const dialog = document.getElementById('demoDialog');
+        const openBtn = document.getElementById('openDialogBtn');
+        const closeBtn = document.getElementById('closeDialogBtn');
+
+        // Open dialog
+        openBtn.addEventListener('click', () => {
+            dialog.showModal();
+        });
+
+        // Close dialog
+        closeBtn.addEventListener('click', () => {
+            dialog.close();
+        });
+
+        // Close dialog when clicking on backdrop
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) {
+                dialog.close();
+            }
+        });
+    </script>
+</body>
+
+</html>
