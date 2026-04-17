@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Parallax</title>
+
+    <link rel="stylesheet" href="../../css/defaults.css">
+
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+        }
+
+        /* 3 layer backgrounds offset by scroll position */
+        .parallax-container {
+            height: 400vh;
+            overflow-x: hidden;
+        }
+
+        .layer {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Background layer: moves slowly */
+        .layer-bg {
+            z-index: 1;
+            background-image: url('img/bg-far.svg');
+            animation: move-slow ease-out;
+
+            animation-timeline: scroll();
+        }
+
+        /* Mid layer: moves a bit faster */
+        .layer-mid {
+            z-index: 2;
+            background-image: url('img/bg-mid.svg');
+            animation: move-medium ease-out;
+
+            animation-timeline: scroll();
+        }
+
+        .layer-far {
+            z-index: 3;
+            background-image: url('img/bg-near.svg');
+            animation: move-fast ease-out;
+
+            animation-timeline: scroll();
+        }
+
+        @keyframes move-slow {
+            from {
+                transform: translateY(10%);
+            }
+
+            to {
+                transform: translateY(0%);
+            }
+
+
+        }
+
+        @keyframes move-medium {
+            from {
+                transform: translateY(20%);
+            }
+
+            to {
+                transform: translateY(0%);
+            }
+        }
+
+        @keyframes move-fast {
+            from {
+                transform: translateY(70%);
+            }
+
+            to {
+                transform: translateY(0%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Parallax Background</h1>
+    <div class="parallax-container">
+        <div class="layer layer-bg"></div>
+        <div class="layer layer-mid"></div>
+        <div class="layer layer-far"></div>
+        <div class="content">Scroll Down!</div>
+    </div>
+</body>
+
+</html>
