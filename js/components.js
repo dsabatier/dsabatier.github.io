@@ -10,7 +10,7 @@ class AppHeader extends HTMLElement {
             <nav>
                 <ul>
                     <li><a href="index.html" class="${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">Home</a></li>
-                    <li><a href="ui-samples.html" class="${currentPath === 'ui-samples.html' ? 'active' : ''}">Portfolio</a></li>
+                    <li><a href="ui-samples.html" class="${currentPath === 'ui-samples.html' ? 'active' : ''}">Noodling</a></li>
                     <li><a class="disabled ${currentPath === 'websites.html' ? 'active' : ''}" aria-disabled="true" tabindex="-1">Websites</a></li>
                     <li><a class="disabled ${currentPath === 'games.html' ? 'active' : ''}" aria-disabled="true" tabindex="-1">Games</a></li>
                     <li><a href="student-demos.html" class="${currentPath === 'student-demos.html' ? 'active' : ''}">Student Demos</a></li>
