@@ -11,13 +11,51 @@
     <style>
         body {
             margin: 0;
-            background: #000;
+
+            background: black;
+            font-family: var(--font-family);
         }
 
         /* 3 layer backgrounds offset by scroll position */
         .parallax-container {
+            max-width: 960px;
+            margin: 0 auto;
             height: 400vh;
             overflow-x: hidden;
+
+            animation: sunset-color linear;
+            animation-timeline: scroll();
+
+        }
+
+        @keyframes sunset-color {
+            0% {
+                background-color: #6ab3ee;
+            }
+
+            15% {
+                background-color: #FFE58A;
+            }
+
+            30% {
+                background-color: #FFCE61;
+            }
+
+            45% {
+                background-color: #EE6C45;
+            }
+
+            60% {
+                background-color: #BF3475;
+            }
+
+            75% {
+                background-color: #50366F;
+            }
+
+            100% {
+                background-color: #1F214D;
+            }
         }
 
         .layer {
@@ -25,9 +63,30 @@
             inset: 0;
             background-size: cover;
             background-position: center;
+            max-width: 960px;
+            margin: 0 auto;
         }
 
-        /* Background layer: moves slowly */
+        .layer-star {
+            z-index: 1;
+            background-image: url('img/bg-star.svg');
+            animation: move-star ease-out;
+            animation-timeline: scroll();
+
+        }
+
+        @keyframes move-star {
+            from {
+                transform: translateY(50%) scale(1);
+            }
+
+            to {
+                transform: translateX(2%) translateY(-45%) scale(1.2);
+            }
+
+
+        }
+
         .layer-bg {
             z-index: 1;
             background-image: url('img/bg-far.svg');
@@ -45,7 +104,7 @@
             animation-timeline: scroll();
         }
 
-        .layer-far {
+        .layer-near {
             z-index: 3;
             background-image: url('img/bg-near.svg');
             animation: move-fast ease-out;
@@ -55,11 +114,11 @@
 
         @keyframes move-slow {
             from {
-                transform: translateY(10%);
+                transform: translateY(-10%);
             }
 
             to {
-                transform: translateY(0%);
+                transform: translateY(5%);
             }
 
 
@@ -67,11 +126,11 @@
 
         @keyframes move-medium {
             from {
-                transform: translateY(20%);
+                transform: translateY(40%);
             }
 
             to {
-                transform: translateY(0%);
+                transform: translateY(20%);
             }
         }
 
@@ -81,7 +140,7 @@
             }
 
             to {
-                transform: translateY(0%);
+                transform: translateY(20%);
             }
         }
     </style>
@@ -90,9 +149,10 @@
 <body>
     <h1>Parallax Background</h1>
     <div class="parallax-container">
+        <div class="layer layer-star"></div>
         <div class="layer layer-bg"></div>
         <div class="layer layer-mid"></div>
-        <div class="layer layer-far"></div>
+        <div class="layer layer-near"></div>
         <div class="content">Scroll Down!</div>
     </div>
 </body>
