@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Parallax</title>
+
+    <link rel="stylesheet" href="../../css/defaults.css">
+
+    <style>
+        body {
+            margin: 0;
+
+            background: black;
+            font-family: var(--font-family);
+        }
+
+        /* 3 layer backgrounds offset by scroll position */
+        .parallax-container {
+            max-width: 960px;
+            margin: 0 auto;
+            height: 400vh;
+            overflow-x: hidden;
+
+            animation: sunset-color linear;
+            animation-timeline: scroll();
+
+        }
+
+        @keyframes sunset-color {
+            0% {
+                background-color: #6ab3ee;
+            }
+
+            15% {
+                background-color: #FFE58A;
+            }
+
+            30% {
+                background-color: #FFCE61;
+            }
+
+            45% {
+                background-color: #EE6C45;
+            }
+
+            60% {
+                background-color: #BF3475;
+            }
+
+            75% {
+                background-color: #50366F;
+            }
+
+            100% {
+                background-color: #1F214D;
+            }
+        }
+
+        .layer {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .layer-star {
+            z-index: 1;
+            background-image: url('img/bg-star.svg');
+            animation: move-star ease-out;
+            animation-timeline: scroll();
+
+        }
+
+        @keyframes move-star {
+            from {
+                transform: translateY(50%) scale(1);
+            }
+
+            to {
+                transform: translateX(2%) translateY(-45%) scale(1.2);
+            }
+
+
+        }
+
+        .layer-bg {
+            z-index: 1;
+            background-image: url('img/bg-far.svg');
+            animation: move-slow ease-out;
+
+            animation-timeline: scroll();
+        }
+
+        /* Mid layer: moves a bit faster */
+        .layer-mid {
+            z-index: 2;
+            background-image: url('img/bg-mid.svg');
+            animation: move-medium ease-out;
+
+            animation-timeline: scroll();
+        }
+
+        .layer-near {
+            z-index: 3;
+            background-image: url('img/bg-near.svg');
+            animation: move-fast ease-out;
+
+            animation-timeline: scroll();
+        }
+
+        @keyframes move-slow {
+            from {
+                transform: translateY(-10%);
+            }
+
+            to {
+                transform: translateY(5%);
+            }
+
+
+        }
+
+        @keyframes move-medium {
+            from {
+                transform: translateY(40%);
+            }
+
+            to {
+                transform: translateY(20%);
+            }
+        }
+
+        @keyframes move-fast {
+            from {
+                transform: translateY(70%);
+            }
+
+            to {
+                transform: translateY(20%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Parallax Background</h1>
+    <div class="parallax-container">
+        <div class="layer layer-star"></div>
+        <div class="layer layer-bg"></div>
+        <div class="layer layer-mid"></div>
+        <div class="layer layer-near"></div>
+        <div class="content">Scroll Down!</div>
+    </div>
+</body>
+
+</html>
