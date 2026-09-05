@@ -1,0 +1,124 @@
+:root {
+    color: #171717;
+    background: #f7f7f5;
+    font-family: Inter, sans-serif;
+    font-synthesis: none;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.splash {
+    display: grid;
+    min-height: 100vh;
+    place-content: center;
+    justify-items: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.splash__eyebrow {
+    margin: 0 0 1rem;
+    color: #6b6b67;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    max-width: 32rem;
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+.demo-list {
+    width: min(100%, 62rem);
+    margin: 5rem auto 0;
+}
+
+.demo-list h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.demo-list__intro {
+    max-width: 38rem;
+    margin: 0.75rem auto 2rem;
+    color: #6b6b67;
+    line-height: 1.5;
+}
+
+.demo-category + .demo-category {
+    margin-top: 2.5rem;
+}
+
+.demo-category > h3 {
+    margin: 0 0 0.75rem;
+    color: #6b6b67;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.demo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.demo-card {
+    display: block;
+    padding: 1.25rem;
+    border: 1px solid #deded9;
+}
+
+.demo-card h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.demo-card h4 a {
+    color: #4C799C;
+}
+
+.demo-card h4 a:hover {
+    text-decoration-thickness: 2px;
+}
+
+.demo-card h4 a:focus-visible {
+    outline: 2px solid #4C799C;
+    outline-offset: 3px;
+}
+
+.demo-card p {
+    margin: 0;
+    color: #6b6b67;
+    font-size: 0.875rem;
+    line-height: 1.45;
+}
+
+@media (max-width: 40rem) {
+    .splash {
+        padding: 4rem 1.25rem;
+    }
+
+    .demo-list {
+        margin-top: 4rem;
+    }
+
+    .demo-grid {
+        grid-template-columns: 1fr;
+    }
+}

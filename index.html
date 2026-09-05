@@ -6,25 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dominic Sabatier</title>
     <link rel="stylesheet" href="css/modern-normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/splash.css">
 </head>
 
 <body>
-    <app-header>
-        <!-- <div class="warning">
-            <h4>Hang on! I'm working on it!</h4>
-            <p>It's a bit of a mess right now while I rework my website. If you're looking for samples of my work, check
-                out my <a href="ui-samples.html">UI Samples</a>!</p>
-            <i>~ Dom, March 24th, 2026</i>
-        </div> -->
-    </app-header>
-    <main class="inner-container">
-        <p>I am a generalist developer with experience working on games, websites and mobile apps. I like making things,
-            learning and teaching :)</p>
+    <main class="splash" aria-labelledby="splash-title">
+        <p class="splash__eyebrow">Dominic Sabatier</p>
+        <h1 id="splash-title">Something new is taking shape.</h1>
+        <section class="demo-list" aria-labelledby="demo-list-title">
+            <h2 id="demo-list-title">Student demos and experiments</h2>
+            <p class="demo-list__intro">In the meantime, check out these demos and experiments built for my students at
+                NAIT.</p>
+            <section class="demo-category" aria-labelledby="games-title">
+                <h3 id="games-title">Games</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4><a href="games/chroma-guess/index.html">Chroma Guessr</a></h4>
+                        <p>Train your eye and web dev skills by guessing colors using Hex codes, RGB values, or HSV values.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/games/Catchy/index.html">Catchy</a></h4>
+                        <p>A small addictive game using canvas.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/SalvageJS/index.html">SalvageJS</a></h4>
+                        <p>A sidescrolling space shmup.  Blow up some asteroids!</p>
+                    </div>
+                </div>
+            </section>
+            <section class="demo-category" aria-labelledby="layout-title">
+                <h3 id="layout-title">Layout and CSS</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4><a href="demos/css-grid/index.html">CSS Grid</a></h4>
+                        <p>Practical examples of flexible grids, template areas, auto grids, and bento layouts.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/full-page/index.html">Full Page</a></h4>
+                        <p>A full-page layout with flex and grid sections that respond to scrolling.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/keyframe-animation/index.html">Keyframe Animation</a></h4>
+                        <p>A hands-on introduction to creating motion with CSS keyframes.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/layouts/index.html">HTML Layouts</a></h4>
+                        <p>Flexbox examples covering rows, columns, wrapping, and nested layouts.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/parallax/index.html">Parallax Background</a></h4>
+                        <p>A scrolling background experiment using layered visual depth.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/progress-bars/index.html">Progress Bars</a></h4>
+                        <p>Native and CSS-built progress indicators, including animated variations.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="demo-category" aria-labelledby="ui-title">
+                <h3 id="ui-title">UI and Interaction</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4><a href="demos/buttons/index.html">CSS Buttons</a></h4>
+                        <p>Examples of basic, glowing, and icon buttons, plus simple CSS effects.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/buttons/super-button/index.html">Super Button</a></h4>
+                        <p>An obnoxious button demonstrating a number of different effects.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/modals/index.html">Dialog</a></h4>
+                        <p>A native HTML dialog experiment for modal interactions.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/themed-buttons/index.html">Themed Buttons</a></h4>
+                        <p>Two themed buttons for deleting an account and confirming a purchase.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="demo-category" aria-labelledby="tools-title">
+                <h3 id="tools-title">Frameworks and Tools</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4><a href="demos/bootstrap/index.html">Bootstrap 5 Real Quick</a></h4>
+                        <p>A Bootstrap 5 tour with grid examples, components, forms, and a dashboard.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4><a href="demos/tailwind/index.html">Tailwind</a></h4>
+                        <p>A small sign-in form built with Tailwind CSS utility classes.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
     </main>
-    <app-footer></app-footer>
-
-    <script src="js/components.js"></script>
 </body>
 
 </html>
